@@ -5,6 +5,7 @@ clone : git clone https://github.com/Havidrosihandanu/campus_scholarship.git <br
 install packae : npm i <br>
 running : node app.js <br>
 create db : campus_scholarship <br>
+import file campus_scholarship.sql pada db yang baru dibuat <br>
 running qpache dan mysql <br>
 url : http://localhost:3000/dashboard <br>
 
