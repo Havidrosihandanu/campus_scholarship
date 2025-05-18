@@ -10,11 +10,11 @@ const db = require("./config/db");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // View engine
 app.set("view engine", "ejs");
-app.set('views', path.join(__dirname, 'views'));       
+app.set('views', path.join(__dirname, 'views'));
 
 // Routes
 app.use("/dashboard", dashboardRoutes);
@@ -27,4 +27,4 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));

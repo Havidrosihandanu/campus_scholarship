@@ -1,8 +1,24 @@
 {
+  "name": "campus_scholarship",
+  "version": "1.0.0",
+  "description": "clone : git clone https://github.com/Havidrosihandanu/campus_scholarship.git <br>\r install packae : npm i <br>\r running : node app.js <br>\r create db : campus_scholarship <br>\r import file campus_scholarship.sql pada db yang baru dibuat <br>\r running qpache dan mysql <br>\r url : http://localhost:3000/dashboard <br>",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node app.js",
+    "build": "postcss public/css/input.css -o public/css/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.7",
+    "autoprefixer": "^10.4.21",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "method-override": "^3.0.0",
-    "mysql2": "^3.14.1"
+    "mysql2": "^3.14.1",
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.1",
+    "tailwindcss": "^4.1.7"
   }
 }
