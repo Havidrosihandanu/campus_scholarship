@@ -1,0 +1,16 @@
+body {
+  font-family: "Inter", sans-serif;
+}
+.stats-card {
+  transition: all 0.3s ease;
+}
+.stats-card:hover {
+  transform: translateY(-5px);
+}
+.chart-container {
+  height: 300px;
+}
+.outline-gray {
+  -webkit-text-stroke: 0.09em gray;
+  paint-order: stroke fill;
+}

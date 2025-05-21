@@ -1,0 +1,122 @@
+<aside
+  class="w-60 bg-gradient-to-b from-sky-800 to-sky-700 fixed h-full transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-20"
+>
+  <div
+    class="p-5 border-b bg-white/10 border-white/10 flex items-center justify-center"
+  >
+    <h1 class="text-white text-xl font-bold truncate">Beasiswa Sigma</h1>
+  </div>
+
+  <nav class="pt-4 px-2">
+    <!-- Dashboard Menu -->
+    <a
+      class="flex items-center px-4 py-3 mb-2 rounded-xl <%= currentPage === 'dashboard' ? 'bg-white/20' : 'hover:bg-white/10' %> transition-colors"
+      href="/dashboard"
+    >
+      <i class="text-white fa-solid fa-house"></i>
+      <span class="ml-3 text-white font-medium">Dashboard</span>
+    </a>
+
+    <!-- Beasiswa Dropdown -->
+    <div class="mb-2">
+      <button
+        id="beasiswaToggle"
+        class="w-full flex items-center px-4 py-3 rounded-xl hover:bg-white/10 transition-colors <%= currentPage === 'scholarship' ? 'bg-white/20' : 'hover:bg-white/10' %> transition-colors"
+      >
+        <i class="text-white fa-brands fa-google-scholar"></i>
+        <span class="ml-3 text-white font-medium">Beasiswa</span>
+        <svg
+          id="chevronIcon"
+          class="ml-auto w-4 h-4 text-white transform transition-transform"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+
+      <!-- Dropdown Items -->
+      <div id="beasiswaDropdown" class="ml-8 mt-1 hidden space-y-2">
+        <a
+          href="#"
+          class="block px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg "
+        >
+          <i class="fa-solid fa-circle-dot mr-2"></i> D3</a
+        >
+        <a
+          href="#"
+          class="block px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg"
+          ><i class="fa-solid fa-circle-dot mr-2"></i> D4</a
+        >
+        <a
+          href="#"
+          class="block px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg"
+          ><i class="fa-solid fa-circle-dot mr-2"></i> S1</a
+        >
+        <a
+          href="#"
+          class="block px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg"
+          ><i class="fa-solid fa-circle-dot mr-2"></i> S2</a
+        >
+        <a
+          href="#"
+          class="block px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg"
+          ><i class="fa-solid fa-circle-dot mr-2"></i> S3</a
+        >
+      </div>
+    </div>
+
+    <a
+      href="/dashboard/announcement"
+      class="flex items-center px-4 py-3 mb-2 rounded-xl <%= currentPage === 'announcement' ? 'bg-white/20' : 'hover:bg-white/10' %> transition-colors"
+    >
+      <i class="text-white fa-solid fa-bullhorn"></i>
+      <span class="ml-3 text-white font-medium">Pengumuman</span>
+    </a>
+
+    <a
+      href="/dashboard/registrant"
+      class="flex items-center px-4 py-3 mb-2 rounded-xl <%= currentPage === 'registrant' ? 'bg-white/20' : 'hover:bg-white/10' %> transition-colors"
+    >
+      <i class="text-white fa-solid fa-users"></i>
+      <span class="ml-3 text-white font-medium">Pendaftaran</span>
+    </a>
+
+    <a
+      href="/dashboard/setting"
+      class="flex items-center px-4 py-3 mb-2 rounded-xl <%= currentPage === 'setting' ? 'bg-white/20' : 'hover:bg-white/10' %> transition-colors"
+    >
+      <i class="text-white fa-solid fa-gear"></i>
+      <span class="ml-3 text-white font-medium">Pengaturan</span>
+    </a>
+  </nav>
+
+  <!-- Logout Section -->
+  <div class="absolute bottom-0 w-full p-4 border-t border-white/10">
+    <a
+      href="/logout"
+      class="flex items-center px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
+    >
+      <svg
+        class="w-5 h-5 text-white"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+        />
+      </svg>
+      <span class="ml-3 text-white font-medium">Logout</span>
+    </a>
+  </div>
+</aside>
