@@ -1,112 +1,120 @@
 <div class="mt-8 bg-white rounded-xl shadow-lg overflow-hidden p-6">
-  <div class="flex items-center justify-between border-b pb-4 mb-4">
-    <h2 class="text-2xl font-semibold text-gray-800">Daftar Pendaftar</h2>
-  </div>
+    <div class="flex items-center justify-between border-b pb-4 mb-4">
+        <h2 class="text-2xl font-semibold text-gray-800">Daftar Pendaftar</h2>
+    </div>
 
-  <div class="overflow-x-auto">
-    <table class="min-w-full table-auto text-sm text-left text-gray-700">
-      <thead class="bg-gray-100 uppercase text-xs text-gray-600">
-        <tr>
-          <th class="px-6 py-3">No</th>
-          <th class="px-6 py-3">Nama</th>
-          <th class="px-6 py-3">Email</th>
-          <th class="px-6 py-3">Tanggal Daftar</th>
-          <th class="px-6 py-3">Aksi</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-200">
-        <% registrants.forEach((registrant, index) => { %>
-        <tr class="hover:bg-gray-50 transition">
-          <td class="px-6 py-4 font-medium"><%= index + 1 %></td>
-          <td class="px-6 py-4"><%= registrant.full_name %></td>
-          <td class="px-6 py-4"><%= registrant.email %></td>
-          <td class="px-6 py-4"><%= registrant.created_at %></td>
-          <td class="px-6 py-4 flex gap-2">
-            <button
-              class="update-btn px-3 py-1 rounded bg-yellow-100 text-yellow-700 hover:bg-yellow-200 transition"
-              title="Edit"
-              data-id="<%= registrant.id %>"
-              data-registrant="<%= JSON.stringify(registrant).replace(/"/g, '&quot;') %>"
-            >
-              <i class="fas fa-edit"></i>
-            </button>
-            <button
-              class="delete-btn px-3 py-1 rounded bg-red-100 text-red-700 hover:bg-red-200 transition"
-              title="Hapus"
-              data-id="<%= registrant.id %>"
-            >
-              <i class="fas fa-trash"></i>
-            </button>
-          </td>
-        </tr>
-        <% }); %>
-      </tbody>
-    </table>
-  </div>
+    <div class="overflow-x-auto">
+        <table class="min-w-full table-auto text-sm text-left text-gray-700">
+            <thead class="bg-gray-100 uppercase text-xs text-gray-600">
+            <tr>
+                <th class="px-6 py-3">No</th>
+                <th class="px-6 py-3">Nama</th>
+                <th class="px-6 py-3">Email</th>
+                <th class="px-6 py-3">Tanggal Daftar</th>
+                <th class="px-6 py-3">Aksi</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+            <% registrants.forEach((registrant, index) => { %>
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-6 py-4 font-medium"><%= index + 1 %></td>
+                    <td class="px-6 py-4"><%= registrant.full_name %></td>
+                    <td class="px-6 py-4"><%= registrant.email %></td>
+                    <td class="px-6 py-4"><%= registrant.created_at %></td>
+                    <td class="px-6 py-4 flex gap-2">
+                        <button
+                                class="update-btn px-3 py-1 rounded bg-yellow-100 text-yellow-700 hover:bg-yellow-200 transition"
+                                title="Edit"
+                                data-id="<%= registrant.id %>"
+                                data-registrant="<%= JSON.stringify(registrant).replace(/"/g, '&quot;') %>"
+                        >
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button
+                                class="delete-btn px-3 py-1 rounded bg-red-100 text-red-700 hover:bg-red-200 transition"
+                                title="Hapus"
+                                data-id="<%= registrant.id %>"
+                        >
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
 </div>
 
-</div>
+<%- include('../../layouts/components/_editModal') %>
+<%- include('../../layouts/components/_deleteModal') %>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Fungsi untuk mengisi form update
-    function populateForm(data) {
-        const fields = [
-            "full_name",
-            "domicile",
-            "birth_date", 
-            "email",
-            "phone",
-            "campus_origin",
-            "major",
-            "degree",
-            "semester",
-            "status",
-        ];
+    document.addEventListener('DOMContentLoaded', function () {
+        // Fungsi untuk mengisi form update
+        function populateForm(data) {
+            const fields = [
+                "full_name",
+                "domicile",
+                "birth_date",
+                "email",
+                "phone",
+                "campus_origin",
+                "major",
+                "degree",
+                "semester",
+                "status",
+            ];
 
-        fields.forEach((field) => {
-            const element = document.getElementById(field);
-            if (element) { // Pastikan elemen ada
-                element.value = data[field] || ""; // Set nilai atau kosongkan jika tidak ada
-            }
-        });
+            fields.forEach((field) => {
+                const element = document.getElementById(field);
+                if (element) { // Pastikan elemen ada
+                    element.value = data[field] || ""; // Set nilai atau kosongkan jika tidak ada
+                }
+            });
 
-        // Format tanggal
-        if (data.birth_date) {
-            const date = new Date(data.birth_date);
-            const birthDateElement = document.getElementById("birth_date");
-            if (birthDateElement) { // Pastikan elemen ada
-                birthDateElement.value = date.toISOString().split('T')[0];
+            // Format tanggal
+            if (data.birth_date) {
+                const date = new Date(data.birth_date);
+                const birthDateElement = document.getElementById("birth_date");
+                if (birthDateElement) { // Pastikan elemen ada
+                    birthDateElement.value = date.toISOString().split('T')[0];
+                }
             }
         }
-    }
 
-    // Event listener untuk tombol edit
-    document.querySelectorAll('.update-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            try {
-                const data = JSON.parse(btn.dataset.registrant.replace(/&quot;/g, '"')); // Fix JSON parsing
-                document.getElementById('updateId').value = data.id;
-                populateForm(data);
-                document.getElementById('updateModal').classList.remove('hidden');
-            } catch(e) {
-                console.error('Error parsing data:', e);
-            }
+        // Event listener untuk tombol edit
+        document.querySelectorAll('.update-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                try {
+                    const data = JSON.parse(btn.dataset.registrant.replace(/&quot;/g, '"'));
+                    document.getElementById('updateId').value = data.id;
+                    populateForm(data);
+
+                    // Update the form action to match the correct route
+                    const form = document.getElementById('updateForm');
+                    form.action = `/dashboard/registrant/${data.id}?_method=PUT`;
+
+                    document.getElementById('updateModal').classList.remove('hidden');
+                } catch (e) {
+                    console.error('Error parsing data:', e);
+                }
+            });
         });
-    });
 
-    // Event listener untuk tombol hapus
-    document.querySelectorAll('.delete-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const id = btn.dataset.id;
-            document.getElementById('deleteId').value = id;
-            document.getElementById('deleteModal').classList.remove('hidden');
+        // Event listener untuk tombol hapus
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.dataset.id;
+                const deleteForm = document.querySelector('#deleteModal form');
+                document.getElementById('deleteId').value = id;
+                deleteForm.action = `/dashboard/registrant/${id}?_method=DELETE`;
+                document.getElementById('deleteModal').classList.remove('hidden');
+            });
         });
-    });
 
-    // Fungsi tutup modal
-    window.closeModal = function(modalId) { // Jadikan fungsi global
-        document.getElementById(modalId).classList.add('hidden');
-    };
-});
+        // Fungsi tutup modal
+        window.closeModal = function (modalId) { // Jadikan fungsi global
+            document.getElementById(modalId).classList.add('hidden');
+        };
+    });
 </script>

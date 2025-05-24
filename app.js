@@ -5,6 +5,8 @@ const dashboardRoutes = require("./routes/dashboardRoute");
 const path = require("path");
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
+const multer = require("multer");
+const upload = multer();
 
 // Middleware
 app.use(express.json());
@@ -18,9 +20,9 @@ app.use(express.static(path.join(__dirname, 'node_modules/@fortawesome/fontaweso
 // View engine
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
-app.use(expressLayouts);
+app.use(expressLayouts);``
 
-app.set("layout", "layouts/dashboard"); 
+app.set("layout", "layouts/dashboard");
 
 // Routes
 app.use("/dashboard", dashboardRoutes);

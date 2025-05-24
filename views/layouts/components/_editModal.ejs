@@ -1,0 +1,92 @@
+<!-- views/layouts/components/_editModal.ejs -->
+<div id="updateModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="w-full h-full flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-3xl h-full max-h-[95vh] overflow-y-auto p-6 rounded-2xl shadow-2xl relative">
+            <h2 class="text-2xl font-semibold mb-6 text-gray-800">Edit Pendaftar</h2>
+
+            <form id="updateForm" method="POST" action="/dashboard/registrant/:id?_method=PUT" enctype="multipart/form-data" class="space-y-6">
+                <input type="hidden" name="id" id="updateId" />
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Label + Input Pair -->
+                    <div>
+                        <label for="full_name" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                        <input type="text" name="full_name" id="full_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="domicile" class="block text-sm font-medium text-gray-700 mb-1">Domisili</label>
+                        <input type="text" name="domicile" id="domicile" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="birth_date" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Lahir</label>
+                        <input type="date" name="birth_date" id="birth_date" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" name="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Nomor Telepon</label>
+                        <input type="text" name="phone" id="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="campus_origin" class="block text-sm font-medium text-gray-700 mb-1">Asal Kampus</label>
+                        <input type="text" name="campus_origin" id="campus_origin" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="major" class="block text-sm font-medium text-gray-700 mb-1">Jurusan</label>
+                        <input type="text" name="major" id="major" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="degree" class="block text-sm font-medium text-gray-700 mb-1">Jenjang</label>
+                        <input type="text" name="degree" id="degree" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="semester" class="block text-sm font-medium text-gray-700 mb-1">Semester</label>
+                        <input type="number" name="semester" id="semester" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                        <input type="text" name="status" id="status" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="interest" class="block text-sm font-medium text-gray-700 mb-1">Minat</label>
+                        <textarea name="interest" id="interest" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="scholarship_id" class="block text-sm font-medium text-gray-700 mb-1">ID Beasiswa</label>
+                        <input type="number" name="scholarship_id" id="scholarship_id" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="letter_of_recomendation" class="block text-sm font-medium text-gray-700 mb-1">Surat Rekomendasi</label>
+                        <input type="file" name="letter_of_recomendation" id="letter_of_recomendation" class="w-full border rounded-lg px-3 py-2 text-sm" />
+                    </div>
+
+                    <div>
+                        <label for="supporting_file" class="block text-sm font-medium text-gray-700 mb-1">File Pendukung</label>
+                        <input type="file" name="supporting_file" id="supporting_file" class="w-full border rounded-lg px-3 py-2 text-sm" />
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-3 mt-6">
+                    <button type="button" onclick="closeModal('updateModal')" class="px-5 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition">Batal</button>
+                    <button type="submit" class="px-5 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition">Simpan</button>
+                </div>
+
+                <button type="button" onclick="closeModal('updateModal')" class="absolute top-3 right-4 text-3xl text-gray-400 hover:text-red-500 transition">&times;</button>
+            </form>
+        </div>
+    </div>
+</div>

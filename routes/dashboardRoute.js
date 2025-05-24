@@ -1,17 +1,31 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
 const dashboardController = require("../controllers/dashboard/dashboardController");
 const registrantController = require("../controllers/dashboard/registrantController");
 const scholarshipController = require("../controllers/dashboard/scholarshipController");
 const settingController = require("../controllers/dashboard/settingControlller");
 const announcementController = require("../controllers/dashboard/announcementController");
 
+const storage = multer.memoryStorage(); // Atau pakai diskStorage jika mau simpan ke folder
+
+const upload = multer({
+    storage: storage,
+});
+
 //Route Dashboard
 router.get("/", dashboardController.index);
 
 // Route Registrant
 router.get("/registrant", registrantController.registrant);
-router.put("/registrant/:id", registrantController.updateRegistrant);
+router.put("/registrant/:id",
+    upload.fields([
+        { name: "letter_of_recomendation", maxCount: 1 },
+        { name: "supporting_file", maxCount: 1 }
+    ]),
+    registrantController.updateRegistrant
+);
+
 router.delete("/registrant/:id", registrantController.deleteRegistrant);
 
 // Route Scholarship
