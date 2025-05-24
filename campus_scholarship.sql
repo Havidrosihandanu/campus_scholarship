@@ -25,6 +25,8 @@ CREATE TABLE scholarship (
     deadline DATE,
     duration VARCHAR(50),
     description TEXT,
+    general_requirement TEXT,
+    special_requirement TEXT,
     status VARCHAR(20),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -50,44 +52,40 @@ CREATE TABLE registrant_data (
 );
 
 INSERT INTO users (name, email, password_hash) VALUES
-('Admin', 'admin@example.com', 'hashedpw1');
+('Admin Sigma', 'admin@beasiswasigma.com', '$2a$10$abcdefghijklmnopqrstuvw.xyz1234567890abcdefghijklmno');
 
-INSERT INTO announcement (title, description, content, file) VALUES
-('Beasiswa Semester Ganjil', 'Pengumuman beasiswa', 'Isi pengumuman A', 'file1.pdf'),
-('Pendaftaran Ulang', 'Instruksi pendaftaran', 'Isi pengumuman B', 'file2.pdf'),
-('Perubahan Jadwal', 'Update jadwal', 'Isi pengumuman C', 'file3.pdf'),
-('Beasiswa Prestasi', 'Beasiswa bagi mahasiswa berprestasi', 'Isi pengumuman D', 'file4.pdf'),
-('Workshop Karir', 'Acara workshop karir', 'Isi pengumuman E', 'file5.pdf'),
-('Batas Akhir Pendaftaran', 'Deadline beasiswa', 'Isi pengumuman F', 'file6.pdf'),
-('Sosialisasi Beasiswa', 'Webinar sosialisasi', 'Isi pengumuman G', 'file7.pdf'),
-('Tes Seleksi Beasiswa', 'Detail teknis tes', 'Isi pengumuman H', 'file8.pdf'),
-('Pelatihan Wajib', 'Pelatihan peserta beasiswa', 'Isi pengumuman I', 'file9.pdf'),
-('Penerimaan Mahasiswa Baru', 'Info PMB', 'Isi pengumuman J', 'file10.pdf');
+INSERT INTO announcement (title, description, content, file, created_at) VALUES
+('Pembukaan Pendaftaran Beasiswa Unggulan Sigma 2025', 'Pendaftaran Beasiswa Unggulan Sigma untuk tahun 2025 telah dibuka!', 'Kami dengan bangga mengumumkan pembukaan pendaftaran Beasiswa Unggulan Sigma 2025. Beasiswa ini ditujukan bagi mahasiswa berprestasi dari berbagai jenjang pendidikan. Jangan lewatkan kesempatan ini!', 'pengumuman_unggulan_2025.pdf', '2025-05-20'),
+('Tips Sukses Wawancara Beasiswa', 'Pelajari tips dan trik untuk menghadapi wawancara beasiswa dengan percaya diri.', 'Wawancara adalah tahap krusial. Pastikan Anda mempersiapkan diri dengan baik, termasuk riset tentang beasiswa dan institusi, serta berlatih menjawab pertanyaan umum.', 'tips_wawancara.pdf', '2025-05-18 14'),
+('Perpanjangan Deadline Beasiswa Riset Inovasi', 'Deadline pendaftaran Beasiswa Riset Inovasi diperpanjang hingga 30 Juni 2025.', 'Mengingat antusiasme yang tinggi dan beberapa permintaan, kami memutuskan untuk memperpanjang batas waktu pendaftaran Beasiswa Riset Inovasi. Manfaatkan waktu tambahan ini!', NULL, '2025-05-15'),
+('Workshop Penulisan Esai Beasiswa', 'Ikuti workshop daring gratis tentang cara menulis esai beasiswa yang menarik.', 'Beasiswa Sigma akan mengadakan workshop daring untuk membantu Anda menyusun esai yang kuat dan persuasif. Daftar sekarang, tempat terbatas!', 'workshop_esai.link', '2025-05-12'),
+('Pengumuman Hasil Seleksi Administrasi Beasiswa IT', 'Daftar nama peserta yang lolos seleksi administrasi Beasiswa Talenta IT.', 'Selamat kepada para peserta yang berhasil lolos seleksi administrasi Beasiswa Talenta IT. Tahap selanjutnya adalah wawancara. Silakan cek email Anda untuk detail lebih lanjut.', 'hasil_seleksi_it.xlsx', '2025-05-10'),
+('Beasiswa Sigma Peduli Lingkungan', 'Program beasiswa baru untuk mahasiswa yang berfokus pada isu lingkungan.', 'Sebagai bentuk komitmen terhadap keberlanjutan, Beasiswa Sigma meluncurkan program beasiswa khusus bagi mahasiswa yang aktif dalam kegiatan pelestarian lingkungan.', NULL, '2025-05-08'),
+('Jadwal Wawancara Beasiswa Unggulan Tahap 1', 'Informasi jadwal wawancara untuk kandidat Beasiswa Unggulan Tahap 1.', 'Para kandidat yang lolos seleksi administrasi Beasiswa Unggulan Tahap 1, silakan cek jadwal wawancara Anda di lampiran. Pastikan Anda hadir tepat waktu.', 'jadwal_wawancara_unggulan.pdf', '2025-05-05'),
+('FAQ Pendaftaran Beasiswa Sigma', 'Jawaban atas pertanyaan umum seputar proses pendaftaran beasiswa.', 'Kami telah merangkum beberapa pertanyaan yang sering diajukan oleh calon pendaftar. Semoga ini membantu Anda dalam proses aplikasi.', NULL, '2025-05-03'),
+('Webinar "Masa Depan Karir dengan Beasiswa"', 'Ikuti webinar inspiratif tentang bagaimana beasiswa dapat membentuk masa depan karir Anda.', 'Beasiswa Sigma mengundang Anda untuk bergabung dalam webinar yang akan menampilkan alumni penerima beasiswa yang sukses di bidangnya.', 'webinar_karir.link', '2025-05-01'),
+('Syarat & Ketentuan Umum Beasiswa Sigma', 'Pembaruan syarat dan ketentuan umum untuk semua program beasiswa.', 'Demi transparansi dan kejelasan, kami telah memperbarui syarat dan ketentuan umum yang berlaku untuk semua program beasiswa di platform Beasiswa Sigma.', 'syarat_ketentuan_umum.pdf', '2025-04-28');
 
-INSERT INTO scholarship (name, type, nominal, deadline, duration, description, status) VALUES
-('Beasiswa Unggulan', 'Prestasi', 10000000, '2025-06-30', '1 Tahun', 'Untuk mahasiswa berprestasi', 'Aktif'),
-('Beasiswa Reguler', 'Akademik', 7500000, '2025-07-15', '1 Semester', 'Beasiswa umum', 'Aktif'),
-('Beasiswa Pintar', 'Non-Akademik', 5000000, '2025-06-20', '6 Bulan', 'Untuk bidang non-akademik', 'Aktif'),
-('Beasiswa Tahfidz', 'Agama', 9000000, '2025-08-01', '1 Tahun', 'Untuk penghafal Quran', 'Aktif'),
-('Beasiswa Atlet', 'Olahraga', 6000000, '2025-06-25', '2 Semester', 'Mahasiswa berprestasi olahraga', 'Aktif'),
-('Beasiswa Bidikmisi', 'Kebutuhan', 8000000, '2025-07-10', '4 Semester', 'Untuk keluarga kurang mampu', 'Aktif'),
-('Beasiswa Riset', 'Penelitian', 12000000, '2025-07-05', '1 Tahun', 'Untuk penelitian mahasiswa', 'Aktif'),
-('Beasiswa Startup', 'Inovasi', 10000000, '2025-08-15', '1 Tahun', 'Untuk ide startup', 'Aktif'),
-('Beasiswa Digital', 'IT', 8500000, '2025-07-20', '1 Semester', 'Untuk mahasiswa bidang IT', 'Aktif'),
-('Beasiswa Luar Negeri', 'Internasional', 15000000, '2025-09-01', '2 Tahun', 'Studi ke luar negeri', 'Aktif');
+INSERT INTO scholarship (name, type, nominal, deadline, duration, description, general_requirement, special_requirement, status, created_at) VALUES
+('Beasiswa Unggulan Sigma 2025', 'Penuh', 1500000, '2025-06-30', '4 ', 'Beasiswa penuh untuk mahasiswa berprestasi dari berbagai jurusan. Mencakup biaya kuliah, tunjangan hidup, dan pengembangan diri.', 'WNI, IPK min 3.50, aktif organisasi, tidak sedang menerima beasiswa lain.', 'Esai motivasi, surat rekomendasi dosen, wawancara.', 'Aktif', '2025-05-01'),
+('Beasiswa Riset Inovasi', 'Parsial', 1000000, '2025-06-15', '1 ', 'Dukungan finansial untuk proyek riset inovatif di bidang teknologi dan sains.', 'WNI, mahasiswa S1/S2, proposal riset inovatif, IPK min 3.25.', 'Presentasi proposal, surat rekomendasi pembimbing.', 'Aktif', '2025-05-05'),
+('Beasiswa Talenta IT', 'Penuh', 1200000, '2025-07-20', '3 ', 'Beasiswa khusus bagi mahasiswa dengan minat dan bakat di bidang teknologi informasi.', 'WNI, mahasiswa D3/S1 jurusan IT, portofolio proyek IT, IPK min 3.00.', 'Uji kompetensi teknis, wawancara.', 'Aktif', '2025-05-10'),
+('Beasiswa Pendidikan Guru', 'Parsial', 750000, '2025-07-01', '2 ', 'Mendukung calon guru berdedikasi untuk pendidikan di daerah terpencil.', 'WNI, mahasiswa jurusan pendidikan, bersedia ditempatkan di daerah terpencil, IPK min 3.00.', 'Surat komitmen, wawancara.', 'Aktif', '2025-05-12'),
+('Beasiswa Seni & Budaya', 'Penuh', 1300000, '2025-08-01', '2 ', 'Beasiswa untuk mahasiswa yang berprestasi di bidang seni dan budaya.', 'WNI, mahasiswa jurusan seni/budaya, portofolio karya, IPK min 3.00.', 'Audisi/pameran karya, wawancara.', 'Aktif', '2025-05-15'),
+('Beasiswa Kewirausahaan Muda', 'Parsial', 800000, '2025-08-15', '1.5 ', 'Dukungan bagi mahasiswa dengan ide bisnis inovatif dan potensi kewirausahaan.', 'WNI, mahasiswa S1/D3, proposal bisnis, IPK min 2.80.', 'Presentasi ide bisnis, wawancara.', 'Aktif', '2025-05-18'),
+('Beasiswa Lingkungan Berkelanjutan', 'Penuh', 1400000, '2025-09-01', '3 ', 'Beasiswa untuk mahasiswa yang berdedikasi pada isu lingkungan dan pembangunan berkelanjutan.', 'WNI, mahasiswa S1/S2 jurusan relevan, terlibat dalam kegiatan lingkungan, IPK min 3.30.', 'Esai tentang isu lingkungan, wawancara.', 'Aktif', '2025-05-20'),
+('Beasiswa Olahraga Berprestasi', 'Parsial', 900000, '2025-09-10', '2 ', 'Dukungan bagi atlet mahasiswa yang mengharumkan nama bangsa di kancah olahraga.', 'WNI, mahasiswa aktif, memiliki prestasi olahraga tingkat nasional/internasional, IPK min 2.75.', 'Sertifikat prestasi, surat rekomendasi pelatih.', 'Aktif', '2025-05-22'),
+('Beasiswa Internasional Sigma', 'Penuh', 2000000, '2025-10-01', '4 ', 'Beasiswa untuk studi di luar negeri bagi mahasiswa berprestasi.', 'WNI, IPK min 3.70, kemampuan bahasa Inggris (TOEFL/IELTS), surat penerimaan universitas luar negeri.', 'Esai, wawancara, tes potensi akademik.', 'Aktif', '2025-05-25'),
+('Beasiswa Djarum Super', 'Penuh', 500000, '2025-05-31', '4 ', 'Beasiswa Djarum Super Gelombang 1 hadir untuk membantu meringankan biaya pendidikanmu.', 'Warga Negara Indonesia (WNI). Terdaftar sebagai mahasiswa aktif di [Nama Universitas/Institusi] untuk jenjang [Sebut jenjang, misal: S1, S2] pada  akademik [Tahun Akademik]. Memiliki Indeks Prestasi Kumulatif (IPK) minimal [Sebut IPK Minimal, misal: 3.00] dari skala 4.00. Tidak sedang menerima beasiswa lain dari sumber lain.', 'Surat rekomendasi dari [Sebut Pemberi Rekomendasi, misal: Dosen Pembimbing Akademik]. Esai dengan tema [Sebut Tema Esai]. Surat pernyataan tidak mampu (jika beasiswa diperuntukkan bagi mahasiswa kurang mampu). Sertifikat prestasi akademik atau non-akademik (jika ada).', 'Aktif', '2025-05-20');
 
-INSERT INTO registrant_data (
-  full_name, domicile, birth_date, email, phone, campus_origin, major, degree,
-  scholarship_id, letter_of_recomendation, supporting_file, interest, semester, status
-) VALUES
-('Ahmad Rizki', 'Jakarta', '2002-01-15', 'ahmad@example.com', '081234567890', 'UI', 'Teknik Informatika', 'S1', 1, 'rekom_ahmad.pdf', 'file_ahmad.pdf', 'AI dan Pemrograman', 4, 'Diterima'),
-('Budi Santoso', 'Bandung', '2001-05-10', 'budi@example.com', '081234567891', 'ITB', 'Matematika', 'S1', 2, 'rekom_budi.pdf', 'file_budi.pdf', 'Analisis Data', 5, 'Diproses'),
-('Clara Putri', 'Surabaya', '2000-11-20', 'clara@example.com', '081234567892', 'UNAIR', 'Kedokteran', 'S1', 3, 'rekom_clara.pdf', 'file_clara.pdf', 'Kesehatan Masyarakat', 6, 'Diterima'),
-('Dani Kurniawan', 'Yogyakarta', '2002-04-04', 'dani@example.com', '081234567893', 'UGM', 'Biologi', 'S1', 4, 'rekom_dani.pdf', 'file_dani.pdf', 'Genetika', 3, 'Ditolak'),
-('Elisa Ningsih', 'Medan', '2001-09-30', 'elisa@example.com', '081234567894', 'USU', 'Farmasi', 'S1', 5, 'rekom_elisa.pdf', 'file_elisa.pdf', 'Obat Herbal', 5, 'Diproses'),
-('Fikri Ramadhan', 'Padang', '2002-02-22', 'fikri@example.com', '081234567895', 'UNAND', 'Ekonomi', 'S1', 6, 'rekom_fikri.pdf', 'file_fikri.pdf', 'Keuangan Digital', 4, 'Diterima'),
-('Gita Ayu', 'Makassar', '2000-07-18', 'gita@example.com', '081234567896', 'UNHAS', 'Sosiologi', 'S1', 7, 'rekom_gita.pdf', 'file_gita.pdf', 'Masyarakat Digital', 6, 'Diproses'),
-('Hendri Saputra', 'Palembang', '2001-12-25', 'hendri@example.com', '081234567897', 'UNSRI', 'Teknik Sipil', 'S1', 8, 'rekom_hendri.pdf', 'file_hendri.pdf', 'Struktur Bangunan', 5, 'Ditolak'),
-('Intan Permata', 'Bali', '2002-03-17', 'intan@example.com', '081234567898', 'Udayana', 'Pariwisata', 'S1', 9, 'rekom_intan.pdf', 'file_intan.pdf', 'Promosi Wisata', 3, 'Diterima'),
-('Joko Prabowo', 'Semarang', '2000-10-09', 'joko@example.com', '081234567899', 'UNDIP', 'Teknik Mesin', 'S1', 10, 'rekom_joko.pdf', 'file_joko.pdf', 'Otomotif', 7, 'Diproses');
-
+INSERT INTO registrant_data (full_name, domicile, birth_date, email, phone, campus_origin, major, degree, scholarship_id, letter_of_recomendation, supporting_file, interest, semester, status, created_at) VALUES
+('Budi Santoso', 'Jakarta', '2003-01-15', 'budi.s@example.com', '081234567890', 'Universitas Maju', 'Teknik Informatika', 'S1', 1, 'surat_rekom_budi.pdf', 'portofolio_budi.zip', 'Sangat tertarik pada AI dan ingin berkontribusi pada pengembangan teknologi.', 6, 'pending', '2025-05-21'),
+('Siti Aminah', 'Bandung', '2002-03-22', 'siti.a@example.com', '081312345678', 'Institut Teknologi Jaya', 'Desain Komunikasi Visual', 'S1', 5, 'surat_rekom_siti.pdf', 'karya_siti.zip', 'Mencintai seni dan ingin mengembangkan karya yang berdampak sosial.', 7, 'pending', '2025-05-22 09'),
+('Joko Susilo', 'Surabaya', '2004-07-01', 'joko.s@example.com', '085787654321', 'Politeknik Negeri Sejahtera', 'Teknik Elektronika', 'D3', 3, 'surat_rekom_joko.pdf', 'sertifikat_joko.pdf', 'Bersemangat dalam dunia robotika dan otomasi industri.', 4, 'pending', '2025-05-22'),
+('Dewi Lestari', 'Yogyakarta', '2003-11-05', 'dewi.l@example.com', '081998765432', 'Universitas Gadjah Mada', 'Ilmu Komunikasi', 'S1', 1, 'surat_rekom_dewi.pdf', NULL, 'Ingin menjadi jurnalis investigasi yang handal dan berintegritas.', 5, 'pending', '2025-05-23'),
+('Ahmad Fauzi', 'Medan', '2001-09-10', 'ahmad.f@example.com', '082112345678', 'Universitas Sumatera Raya', 'Agroteknologi', 'S1', 7, 'surat_rekom_ahmad.pdf', 'proyek_lingkungan_ahmad.pdf', 'Peduli terhadap keberlanjutan pangan dan lingkungan.', 8, 'pending', '2025-05-23'),
+('Putri Indah', 'Makassar', '2004-02-28', 'putri.i@example.com', '081122334455', 'Universitas Hasanuddin', 'Kedokteran', 'S1', 1, 'surat_rekom_putri.pdf', NULL, 'Bercita-cita menjadi dokter spesialis anak dan mengabdi di daerah terpencil.', 2, 'pending', '2025-05-24'),
+('Rizky Pratama', 'Palembang', '2002-06-17', 'rizky.p@example.com', '087899887766', 'Universitas Sriwijaya', 'Manajemen', 'S1', 6, 'surat_rekom_rizky.pdf', 'proposal_bisnis_rizky.pdf', 'Tertarik membangun startup di bidang edutech.', 6, 'pending', '2025-05-24'),
+('Cahaya Mentari', 'Denpasar', '2003-04-03', 'cahaya.m@example.com', '081287654321', 'Universitas Udayana', 'Pariwisata', 'S1', 5, 'surat_rekom_cahaya.pdf', 'portofolio_cahaya.zip', 'Ingin mempromosikan pariwisata berkelanjutan di Indonesia.', 5, 'pending', '2025-05-24'),
+('Fajar Nugraha', 'Semarang', '2001-10-20', 'fajar.n@example.com', '085234567890', 'Universitas Diponegoro', 'Hukum', 'S1', 1, 'surat_rekom_fajar.pdf', NULL, 'Berkeinginan menjadi advokat yang membela hak-hak masyarakat.', 8, 'pending', '2025-05-25'),
+('Kartika Sari', 'Bogor', '2003-08-12', 'kartika.s@example.com', '081765432109', 'Universitas Pakuan', 'Pendidikan Bahasa Inggris', 'S1', 4, 'surat_rekom_kartika.pdf', 'sertifikat_mengajar_kartika.pdf', 'Bermimpi menjadi guru bahasa Inggris yang inspiratif.', 7, 'pending', '2025-05-25');
