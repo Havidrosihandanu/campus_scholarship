@@ -1,0 +1,271 @@
+<div class="container mx-auto p-8 bg-white rounded-lg shadow-md">
+  <h2 class="text-2xl font-semibold mb-6">Formulir Pendaftaran Beasiswa</h2>
+  <form
+    class="grid grid-cols-1 md:grid-cols-3 gap-4"
+    action="/portal/scholarship-form"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <input type="hidden" name="scholarship_id" value="<%= scholarshipID %>" />
+    <div>
+      <label for="full_name" class="block text-gray-700 text-sm font-bold mb-2"
+        >Nama Lengkap :</label
+      >
+      <input
+        type="text"
+        id="full_name"
+        name="full_name"
+        placeholder="Masukkan Nama Lengkap"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+    <div>
+      <label for="birth_date" class="block text-gray-700 text-sm font-bold mb-2"
+        >Tanggal Lahir :</label
+      >
+      <input
+        type="date"
+        id="birth_date"
+        name="birth_date"
+        placeholder="Masukkan Tanggal Lahir"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+    <div>
+      <label for="domicile" class="block text-gray-700 text-sm font-bold mb-2"
+        >Domisili :</label
+      >
+      <input
+        type="text"
+        id="domicile"
+        name="domicile"
+        placeholder="Masukkan Alamat Domisili"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+    <div>
+      <label for="email" class="block text-gray-700 text-sm font-bold mb-2"
+        >Email :</label
+      >
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Masukkan Email"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+    <div>
+      <label for="phone" class="block text-gray-700 text-sm font-bold mb-2"
+        >No Telepon :</label
+      >
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="Masukkan Nomor Telepon"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+    <div>
+      <label
+        for="campus_origin"
+        class="block text-gray-700 text-sm font-bold mb-2"
+        >Asal Kampus :</label
+      >
+      <input
+        type="text"
+        id="campus_origin"
+        name="campus_origin"
+        placeholder="Masukkan Asal Kampus"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+    <div>
+      <label for="major" class="block text-gray-700 text-sm font-bold mb-2"
+        >Prodi :</label
+      >
+      <input
+        type="text"
+        id="major"
+        name="major"
+        placeholder="Masukkan Program Studi"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+    <div>
+      <label for="degree" class="block text-gray-700 text-sm font-bold mb-2"
+        >Tingkatan :</label
+      >
+      <div class="relative">
+        <select
+          id="degree"
+          name="degree"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        >
+          <option value="">Pilih Tingkatan</option>
+          <option value="D3">D3</option>
+          <option value="D4">D4</option>
+          <option value="S1">S1</option>
+          <option value="S2">S2</option>
+          <option value="S3">S3</option>
+        </select>
+        <div
+          class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+        >
+          <svg
+            class="fill-current h-4 w-4"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div>
+      <label for="semester" class="block text-gray-700 text-sm font-bold mb-2"
+        >Semester :</label
+      >
+      <div class="relative">
+        <select
+          id="semester"
+          name="semester"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        >
+          <option value="">Pilih Semester</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+        </select>
+        <div
+          class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+        >
+          <svg
+            class="fill-current h-4 w-4"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="col-span-1 md:col-span-3">
+      <label for="interest" class="block text-gray-700 text-sm font-bold mb-2"
+        >Cerita Singkat Tentang Diri :</label
+      >
+      <textarea
+        id="interest"
+        name="interest"
+        placeholder="Cerita kelebihan, kekurangan dan pengalaman"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-24"
+      ></textarea>
+    </div>
+    <div>
+      <label
+        for="letter_of_recomendation"
+        class="block text-gray-700 text-sm font-bold mb-2"
+        >Surat Rekomendasi :</label
+      >
+      <div class="relative border rounded shadow-sm py-2 px-3 bg-white">
+        <input
+          type="file"
+          id="letter_of_recomendation"
+          name="letter_of_recomendation"
+          class="absolute w-full h-full opacity-0 cursor-pointer"
+          onchange="updateFileName(this, 'letter_of_recomendation_name')"
+        />
+        <div class="flex items-center">
+          <svg
+            class="w-5 h-5 text-gray-500 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828L16.97 13.172M22 12h-4m-4 0H6m-4 0h2"
+            />
+          </svg>
+          <span id="letter_of_recomendation_name" class="text-gray-700"
+            >pilih file</span
+          >
+        </div>
+      </div>
+    </div>
+    <div>
+      <label
+        for="supporting_file"
+        class="block text-gray-700 text-sm font-bold mb-2"
+        >File Pendukung :</label
+      >
+      <div class="relative border rounded shadow-sm py-2 px-3 bg-white">
+        <input
+          type="file"
+          id="supporting_file"
+          name="supporting_file"
+          class="absolute w-full h-full opacity-0 cursor-pointer"
+          onchange="updateFileName(this, 'supporting_file_name')"
+        />
+        <div class="flex items-center">
+          <svg
+            class="w-5 h-5 text-gray-500 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828L16.97 13.172M22 12h-4m-4 0H6m-4 0h2"
+            />
+          </svg>
+          <span id="supporting_file_name" class="text-gray-700"
+            >pilih file</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-1 md:col-span-3">
+      <button
+        type="submit"
+        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      >
+        Submit
+      </button>
+    </div>
+
+    <input type="hidden" name="status" value="pending" />
+    <input
+      type="hidden"
+      name="created_at"
+      value="<?php echo date('Y-m-d H:i:s'); ?>"
+    />
+  </form>
+</div>
+<script>
+  function updateFileName(input, spanId) {
+    const fileNameSpan = document.getElementById(spanId);
+    if (input.files && input.files.length > 0) {
+      fileNameSpan.textContent = input.files[0].name;
+    } else {
+      fileNameSpan.textContent = "pilih file";
+    }
+  }
+</script>
