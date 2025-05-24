@@ -7,6 +7,7 @@ exports.scholarship = (req, res) => {
       res.status(500).send("Gagal mengambil data beasiswa.");
     } else {
       res.render("dashboard/scholarship", {
+        layout: "./layouts/dashboard",
         scholarships: result,
         title: "Beasiswa",
         currentPage: "scholarship",

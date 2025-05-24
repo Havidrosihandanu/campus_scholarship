@@ -7,11 +7,12 @@ exports.announcement = (req, res) => {
       res.status(500).send("Gagal mengambil data berita.");
     } else {
       res.render("dashboard/announcement", {
+        layout: "./layouts/dashboard",
         announcements: result,
         title: "Pengumuman",
         currentPage: "announcement",
         scripts: "",
-        stylesheets : "",
+        stylesheets: "",
       });
     }
   });

@@ -5,6 +5,7 @@ exports.setting = (req, res) => {
     if (err) {
       console.log(err);
       res.render("dashboard/setting", {
+        layout: "./layouts/dashboard",
         settings: result,
         title: "Pengaturan",
         currentPage: "setting",
@@ -13,6 +14,7 @@ exports.setting = (req, res) => {
       });
     } else {
       res.render("dashboard/setting", {
+        layout: "./layouts/dashboard",
         settings: result,
         title: "Pengaturan",
         currentPage: "setting",

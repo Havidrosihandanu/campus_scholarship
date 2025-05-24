@@ -1,6 +1,6 @@
 const db = require("../../config/db");
-const path = require('path');
-const fs = require('fs');
+const path = require("path");
+const fs = require("fs");
 
 exports.registrant = (req, res) => {
   db.query("SELECT * FROM registrant_data", (err, result) => {
@@ -11,6 +11,7 @@ exports.registrant = (req, res) => {
       res.render("dashboard/registrant", {
         registrants: result,
         title: "Pendaftar",
+        layout: "./layouts/dashboard",
         currentPage: "registrant",
         scripts: "",
         stylesheets: "",
@@ -36,7 +37,7 @@ exports.updateRegistrant = (req, res) => {
     major,
     degree,
     semester,
-    status
+    status,
   } = req.body;
 
   // Ambil file dari req.files
@@ -48,26 +49,28 @@ exports.updateRegistrant = (req, res) => {
 
   // Validasi input
   if (!id || !full_name || !email) {
-    return res.status(400).json({ success: false, message: "Data tidak lengkap" });
+    return res
+      .status(400)
+      .json({ success: false, message: "Data tidak lengkap" });
   }
 
   // Simpan file jika ada
   let letterFileName = null;
   let supportFileName = null;
 
-  const uploadDir = path.join(__dirname, '../../public/uploads');
+  const uploadDir = path.join(__dirname, "../../public/uploads");
 
   if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
   }
 
   if (letterFile) {
-    letterFileName = Date.now() + '-' + letterFile.originalname;
+    letterFileName = Date.now() + "-" + letterFile.originalname;
     fs.writeFileSync(path.join(uploadDir, letterFileName), letterFile.buffer);
   }
 
   if (supportFile) {
-    supportFileName = Date.now() + '-' + supportFile.originalname;
+    supportFileName = Date.now() + "-" + supportFile.originalname;
     fs.writeFileSync(path.join(uploadDir, supportFileName), supportFile.buffer);
   }
 
@@ -85,8 +88,8 @@ exports.updateRegistrant = (req, res) => {
       degree = ?,
       semester = ?,
       status = ?
-      ${letterFileName ? ', letter_of_recomendation = ?' : ''}
-      ${supportFileName ? ', supporting_file = ?' : ''}
+      ${letterFileName ? ", letter_of_recomendation = ?" : ""}
+      ${supportFileName ? ", supporting_file = ?" : ""}
     WHERE id = ?
   `;
 
@@ -101,7 +104,7 @@ exports.updateRegistrant = (req, res) => {
     major,
     degree,
     semester,
-    status
+    status,
   ];
 
   if (letterFileName) values.push(letterFileName);
@@ -111,11 +114,15 @@ exports.updateRegistrant = (req, res) => {
   db.query(baseQuery, values, (err, results) => {
     if (err) {
       console.error(err);
-      return res.status(500).json({ success: false, message: "Gagal update data" });
+      return res
+        .status(500)
+        .json({ success: false, message: "Gagal update data" });
     }
 
     if (results.affectedRows === 0) {
-      return res.status(404).json({ success: false, message: "Data tidak ditemukan" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Data tidak ditemukan" });
     }
 
     res.redirect("/dashboard/registrant");
