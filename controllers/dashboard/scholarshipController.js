@@ -33,7 +33,7 @@ exports.createScholarship = (req, res) => {
   } = req.body;
 
   // Debug
-  console.log("📦 req.body:", req.body);
+  // console.log("📦 req.body:", req.body);
 
   const query = `
     INSERT INTO scholarship 

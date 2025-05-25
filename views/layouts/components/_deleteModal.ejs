@@ -2,7 +2,7 @@
 <div id="deleteModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 relative">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">Konfirmasi Hapus</h2>
-        <p class="text-gray-600 mb-6">Apakah kamu yakin ingin menghapus data pendaftar ini? Tindakan ini tidak dapat dibatalkan.</p>
+        <p class="text-gray-600 mb-6">Apakah kamu yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.</p>
 
         <form method="POST" action="/dashboard/registrant/:id?_method=DELETE">
             <input type="hidden" id="deleteId" name="id" />
