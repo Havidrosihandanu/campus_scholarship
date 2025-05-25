@@ -1,0 +1,82 @@
+<!-- views/layouts/components/_editScholarshipModal.ejs -->
+<div id="editScholarshipModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="w-full h-full flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-3xl h-full max-h-[95vh] overflow-y-auto p-6 rounded-2xl shadow-2xl relative">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Edit Beasiswa</h2>
+
+            <form id="editScholarshipForm" method="POST" action="/dashboard/scholarship/:id?_method=PUT" class="space-y-6">
+                <input type="hidden" name="id" id="scholarship_id_edit" />
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="md:col-span-2">
+                        <label for="name_edit" class="block text-sm font-medium text-gray-700 mb-1">Nama Beasiswa</label>
+                        <input type="text" name="name" id="name_edit" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="description_edit" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
+                        <textarea name="description" id="description_edit" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" required></textarea>
+                    </div>
+
+                    <div>
+                        <label for="type_edit" class="block text-sm font-medium text-gray-700 mb-1">Tipe</label>
+                        <input type="text" name="type" id="type_edit" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="nominal_edit" class="block text-sm font-medium text-gray-700 mb-1">Nominal</label>
+                        <input type="number" name="nominal" id="nominal_edit" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="deadline_edit" class="block text-sm font-medium text-gray-700 mb-1">Tenggat Waktu</label>
+                        <input type="date" name="deadline" id="deadline_edit" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="duration_edit" class="block text-sm font-medium text-gray-700 mb-1">Durasi</label>
+                        <input type="text" name="duration" id="duration_edit" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="general_requirement_edit" class="block text-sm font-medium text-gray-700 mb-1">Syarat Umum</label>
+                        <textarea name="general_requirement" id="general_requirement_edit" rows="3" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="special_requirement_edit" class="block text-sm font-medium text-gray-700 mb-1">Syarat Khusus</label>
+                        <textarea name="special_requirement" id="special_requirement_edit" rows="3" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Jenjang</label>
+                        <div class="flex flex-wrap gap-3">
+                            <label><input type="checkbox" class="checkbox-degree" value="D3" /> D3</label>
+                            <label><input type="checkbox" class="checkbox-degree" value="D4" /> D4</label>
+                            <label><input type="checkbox" class="checkbox-degree" value="S1" /> S1</label>
+                            <label><input type="checkbox" class="checkbox-degree" value="S2" /> S2</label>
+                            <label><input type="checkbox" class="checkbox-degree" value="S3" /> S3</label>
+                        </div>
+                        <input type="hidden" name="degree_requirement" id="degree_requirement_edit" />
+                    </div>
+
+                    <div>
+                        <label for="status_edit" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                        <select name="status" id="status_edit" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Pilih status</option>
+                            <option value="Aktif">Aktif</option>
+                            <option value="Tidak Aktif">Tidak Aktif</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-3 mt-6">
+                    <button type="button" onclick="closeModal('editScholarshipModal')" class="px-5 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition">Batal</button>
+                    <button type="submit" class="px-5 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition">Simpan</button>
+                </div>
+            </form>
+
+            <button type="button" onclick="closeModal('editScholarshipModal')" class="absolute top-3 right-4 text-3xl text-gray-400 hover:text-red-500 transition">&times;</button>
+        </div>
+    </div>
+</div>

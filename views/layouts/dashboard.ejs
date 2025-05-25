@@ -41,7 +41,6 @@
       </main>
     </div>
 
-    <!-- Scripts -->
     <script>
       // Toggle Sidebar Mobile
       const sidebar = document.querySelector("aside");
@@ -53,23 +52,22 @@
         mobileBackdrop.classList.toggle("hidden");
       };
 
-      menuToggle.addEventListener("click", toggleSidebar);
-      mobileBackdrop.addEventListener("click", toggleSidebar);
+      menuToggle?.addEventListener("click", toggleSidebar);
+      mobileBackdrop?.addEventListener("click", toggleSidebar);
 
-      // Beasiswa Dropdown
-      const beasiswaToggle = document.getElementById("beasiswaToggle");
+      // Beasiswa Dropdown Toggle (only when clicking chevron)
+      const chevronToggle = document.getElementById("chevronToggle");
       const beasiswaDropdown = document.getElementById("beasiswaDropdown");
       const chevronIcon = document.getElementById("chevronIcon");
 
-      if (beasiswaToggle) {
-        beasiswaToggle.addEventListener("click", () => {
-          beasiswaDropdown.classList.toggle("hidden");
-          chevronIcon.classList.toggle("rotate-180");
-        });
-      }
+      chevronToggle?.addEventListener("click", (e) => {
+        e.preventDefault(); // prevent link behavior
+        beasiswaDropdown?.classList.toggle("hidden");
+        chevronIcon?.classList.toggle("rotate-180");
+      });
 
       // Close dropdown on mobile when resizing
-      window.addEventListener("res ize", () => {
+      window.addEventListener("resize", () => {
         if (window.innerWidth >= 768) {
           sidebar.classList.remove("-translate-x-full");
           mobileBackdrop.classList.add("hidden");

@@ -17,8 +17,11 @@
             </div>
         </form>
 
+        <form method="POST" action="/dashboard/scholarship/:id?_method=DELETE">
+            <input type="hidden" id="deleteId" name="id">
+        </form>
+
         <button type="button" onclick="closeModal('deleteModal')" class="absolute top-3 right-4 text-2xl text-gray-400 hover:text-red-500 transition">
-            &times;
         </button>
     </div>
 </div>

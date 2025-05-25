@@ -29,13 +29,15 @@ router.put("/registrant/:id",
 router.delete("/registrant/:id", registrantController.deleteRegistrant);
 
 // Route Scholarship
+router.post("/scholarship", upload.none(), scholarshipController.createScholarship);
 router.get("/scholarship", scholarshipController.scholarship);
+router.get("/scholarship/degree/:degree", scholarshipController.scholarshipByDegree);
 router.put("/scholarship/:id", scholarshipController.updateScholarship);
 router.delete("/scholarship/:id", scholarshipController.deleteScholarship);
 
 // Router Announcement
 router.get("/announcement", announcementController.announcement);
-router.put("/announcement/:id", announcementController.updateAnnouncement);
+router.put("/announcement/:id", upload.single("file"), announcementController.updateAnnouncement);
 router.delete("/announcement/:id", announcementController.deleteAnnouncement);
 
 // Route Settings

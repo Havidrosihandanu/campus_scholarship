@@ -18,61 +18,51 @@
     </a>
 
     <!-- Beasiswa Dropdown -->
-    <div class="mb-2">
-      <button
-        id="beasiswaToggle"
-        class="w-full flex items-center px-4 py-3 rounded-xl hover:bg-white/10 transition-colors <%= currentPage === 'scholarship' ? 'bg-white/20' : 'hover:bg-white/10' %> transition-colors"
-      >
-        <i class="text-white fa-brands fa-google-scholar"></i>
-        <span class="ml-3 text-white font-medium">Beasiswa</span>
-        <svg
-          id="chevronIcon"
-          class="ml-auto w-4 h-4 text-white transform transition-transform"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
-      </button>
+      <!-- Tombol Beasiswa (klik = tampil semua data) -->
+        <a href="/dashboard/scholarship" class="w-full flex items-center px-4 py-3 rounded-xl hover:bg-white/10 transition-colors <%= currentPage === 'scholarship' ? 'bg-white/20' : 'hover:bg-white/10' %>">
+            <i class="text-white fa-brands fa-google-scholar"></i>
+            <span class="ml-3 text-white font-medium">Beasiswa</span>
 
-      <!-- Dropdown Items -->
+            <!-- Chevron wrapper with larger click area -->
+            <span id="chevronToggle" class="ml-auto p-2 rounded-md hover:bg-white/10 cursor-pointer">
+                <svg
+                        id="chevronIcon"
+                        class="w-4 h-4 text-white transform transition-transform"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                >
+                  <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+            </span>
+        </a>
+
+
+      <!-- Dropdown Filter Berdasarkan Degree -->
       <div id="beasiswaDropdown" class="ml-8 mt-1 hidden space-y-2">
-        <a
-          href="#"
-          class="block px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg "
-        >
-          <i class="fa-solid fa-circle-dot mr-2"></i> D3</a
-        >
-        <a
-          href="#"
-          class="block px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg"
-          ><i class="fa-solid fa-circle-dot mr-2"></i> D4</a
-        >
-        <a
-          href="#"
-          class="block px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg"
-          ><i class="fa-solid fa-circle-dot mr-2"></i> S1</a
-        >
-        <a
-          href="#"
-          class="block px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg"
-          ><i class="fa-solid fa-circle-dot mr-2"></i> S2</a
-        >
-        <a
-          href="#"
-          class="block px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg"
-          ><i class="fa-solid fa-circle-dot mr-2"></i> S3</a
-        >
+        <a href="/dashboard/scholarship/degree/D3" class="block px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg">
+          <i class="fa-solid fa-circle-dot mr-2"></i> D3
+        </a>
+        <a href="/dashboard/scholarship/degree/D4" class="block px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg">
+          <i class="fa-solid fa-circle-dot mr-2"></i> D4
+        </a>
+        <a href="/dashboard/scholarship/degree/S1" class="block px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg">
+          <i class="fa-solid fa-circle-dot mr-2"></i> S1
+        </a>
+        <a href="/dashboard/scholarship/degree/S2" class="block px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg">
+          <i class="fa-solid fa-circle-dot mr-2"></i> S2
+        </a>
+        <a href="/dashboard/scholarship/degree/S3" class="block px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg">
+          <i class="fa-solid fa-circle-dot mr-2"></i> S3
+        </a>
       </div>
-    </div>
 
-    <a
+      <a
       href="/dashboard/announcement"
       class="flex items-center px-4 py-3 mb-2 rounded-xl <%= currentPage === 'announcement' ? 'bg-white/20' : 'hover:bg-white/10' %> transition-colors"
     >

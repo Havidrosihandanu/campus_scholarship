@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'node_modules/@fortawesome/fontaweso
 // View engine
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
-app.use(expressLayouts);``
+app.use(expressLayouts);
 
 
 // Routes

@@ -45,7 +45,7 @@
     </div>
 </div>
 
-<%- include('../../layouts/components/_editModal') %>
+<%- include('../../layouts/components/_editRegistrantModal') %>
 <%- include('../../layouts/components/_deleteModal') %>
 
 <script>
@@ -80,6 +80,22 @@
                     birthDateElement.value = date.toISOString().split('T')[0];
                 }
             }
+
+            // Tampilkan nama file saat ini (jika ada)
+            const currentLetter = document.getElementById("currentLetterFile");
+            if (currentLetter) {
+                currentLetter.textContent = data.letter_of_recomendation
+                    ? `File saat ini: ${data.letter_of_recomendation}`
+                    : "";
+            }
+
+            const currentSupport = document.getElementById("currentSupportFile");
+            if (currentSupport) {
+                currentSupport.textContent = data.supporting_file
+                    ? `File saat ini: ${data.supporting_file}`
+                    : "";
+            }
+
         }
 
         // Event listener untuk tombol edit

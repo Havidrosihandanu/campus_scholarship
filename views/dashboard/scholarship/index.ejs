@@ -1,51 +1,184 @@
 <div class="mt-8 bg-white rounded-xl shadow-lg overflow-hidden p-6">
-  <div class="flex items-center justify-between border-b pb-4 mb-4">
-    <h2 class="text-2xl font-semibold text-gray-800">Daftar Pengumuman</h2>
-  </div>
+    <div class="flex items-center justify-between border-b pb-4 mb-4">
+        <h2 class="text-2xl font-semibold text-gray-800">Daftar Beasiswa</h2>
+        <button
+                id="addScholarshipBtn"
+                onclick="document.getElementById('createScholarshipModal').classList.remove('hidden')"
+                class="px-5 py-2 rounded-lg bg-blue-800 text-white shadow-md hover:bg-blue-900 transition"
+        >
+            + Tambah Beasiswa
+        </button>
+    </div>
 
-  <div class="overflow-x-auto">
-    <table class="min-w-full table-auto text-sm text-left text-gray-700">
-      <thead class="bg-gray-100 uppercase text-xs text-gray-600">
-        <tr>
-          <th class="px-6 py-3">No</th>
-          <th class="px-6 py-3">Nama Beasiswa</th>
-          <th class="px-6 py-3">Tipe</th>
-          <th class="px-6 py-3">Tanggal Tutup</th>
-          <th class="px-6 py-3">Status</th>
-          <th class="px-6 py-3">Aksi</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-200">
-        <% scholarships.forEach((scholarship, index) => { %>
-        <tr class="hover:bg-gray-50 transition">
-          <td class="px-6 py-4 font-medium"><%= index + 1 %></td>
-          <td class="px-6 py-4"><%= scholarship.name %></td>
-          <td class="px-6 py-4"><%= scholarship.type %></td>
-          <td class="px-6 py-4"><%= scholarship.deadline %></td>
-          <td class="px-6 py-4"><%= scholarship.status %></td>
-          <td class="px-6 py-4 flex gap-2">
-            <!-- Tombol Edit -->
-            <button
-              class="update-btn px-3 py-1 rounded bg-yellow-100 text-yellow-700 hover:bg-yellow-200 transition"
-              title="Edit"
-              data-id="<%= scholarship.id %>"
-              data-scholarship="<%= JSON.stringify(scholarship).replace(/"/g, '&quot;') %>"
-            >
-              <i class="fas fa-edit"></i>
-            </button>
+    <div class="overflow-x-auto">
+        <table class="min-w-full table-auto text-sm text-left text-gray-700">
+            <thead class="bg-gray-100 uppercase text-xs text-gray-600">
+            <tr>
+                <th class="px-6 py-3">No</th>
+                <th class="px-6 py-3">Nama Beasiswa</th>
+                <th class="px-6 py-3">Tipe</th>
+                <th class="px-6 py-3">Tanggal Tutup</th>
+                <th class="px-6 py-3">Status</th>
+                <th class="px-6 py-3">Aksi</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+            <% scholarships.forEach((scholarship, index) => { %>
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-6 py-4 font-medium"><%= index + 1 %></td>
+                    <td class="px-6 py-4"><%= scholarship.name %></td>
+                    <td class="px-6 py-4"><%= scholarship.type %></td>
+                    <td class="px-6 py-4"><%= scholarship.deadline %></td>
+                    <td class="px-6 py-4"><%= scholarship.status %></td>
+                    <td class="px-6 py-4 flex gap-2">
+                        <!-- Tombol Edit -->
+                        <button
+                                class="update-btn px-3 py-1 rounded bg-yellow-100 text-yellow-700 hover:bg-yellow-200 transition"
+                                title="Edit"
+                                data-id="<%= scholarship.id %>"
+                                data-scholarship="<%= JSON.stringify(scholarship).replace(/"/g, '&quot;') %>"
+                        >
+                            <i class="fas fa-edit"></i>
+                        </button>
 
-            <!-- Tombol Delete -->
-            <button
-              class="delete-btn px-3 py-1 rounded bg-red-100 text-red-700 hover:bg-red-200 transition"
-              title="Hapus"
-              data-id="<%= scholarship.id %>"
-            >
-              <i class="fas fa-trash"></i>
-            </button>
-          </td>
-        </tr>
-        <% }) %>
-      </tbody>
-    </table>
-  </div>
+                        <!-- Tombol Delete -->
+                        <button
+                                class="delete-btn px-3 py-1 rounded bg-red-100 text-red-700 hover:bg-red-200 transition"
+                                title="Hapus"
+                                data-id="<%= scholarship.id %>"
+                        >
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<%- include('../../layouts/components/_createScholarshipModal') %>
+<%- include('../../layouts/components/_editScholarshipModal') %>
+<%- include('../../layouts/components/_deleteModal') %>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Fill the edit form fields
+        function populateScholarshipForm(data) {
+            const fields = [
+                "name_edit",
+                "type_edit",
+                "nominal_edit",
+                "deadline_edit",
+                "duration_edit",
+                "description_edit",
+                "general_requirement_edit",
+                "special_requirement_edit",
+                "degree_requirement_edit",
+                "status_edit"
+            ];
+
+            fields.forEach((field) => {
+                const element = document.getElementById(field);
+                if (element) {
+                    const key = field.replace("_edit", "");
+                    element.value = data[key] || "";
+                }
+            });
+
+            // Format deadline
+            if (data.deadline) {
+                const date = new Date(data.deadline);
+                const deadlineInput = document.getElementById("deadline_edit");
+                if (deadlineInput) {
+                    deadlineInput.value = date.toISOString().split('T')[0];
+                }
+            }
+        }
+
+        // Edit button click
+        document.querySelectorAll('.update-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                try {
+                    const data = JSON.parse(btn.dataset.scholarship.replace(/&quot;/g, '"'));
+                    document.getElementById('scholarship_id_edit').value = data.id;
+                    populateScholarshipForm(data);
+                    // Checkbox degree
+                    const degreeCheckboxes = document.querySelectorAll('.checkbox-degree');
+                    const degreeHiddenInput = document.getElementById('degree_requirement_edit');
+
+// Perbarui input hidden saat centang berubah
+                    function updateDegreeField() {
+                        const selected = Array.from(degreeCheckboxes)
+                            .filter(cb => cb.checked)
+                            .map(cb => cb.value);
+                        degreeHiddenInput.value = selected.join('/'); // <-- pakai slash
+                    }
+
+                    degreeCheckboxes.forEach(cb => {
+                        cb.addEventListener('change', updateDegreeField);
+                    });
+
+// Perbarui checkbox saat form edit dibuka
+                    function populateDegreeCheckboxes(valueString) {
+                        const selectedDegrees = valueString.split('/').map(v => v.trim()); // <-- pakai slash
+                        degreeCheckboxes.forEach(cb => {
+                            cb.checked = selectedDegrees.includes(cb.value);
+                        });
+                        updateDegreeField();
+                    }
+
+// Tambahkan ini di dalam populateScholarshipForm(data)
+                    if (data.degree_requirement) {
+                        populateDegreeCheckboxes(data.degree_requirement);
+                    }
+
+
+                    const form = document.getElementById('editScholarshipForm');
+                    form.action = `/dashboard/scholarship/${data.id}?_method=PUT`;
+
+                    document.getElementById('editScholarshipModal').classList.remove('hidden');
+                } catch (e) {
+                    console.error('Gagal parsing data:', e);
+                }
+            });
+        });
+
+        // Delete button click
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.dataset.id;
+                const deleteForm = document.querySelector('#deleteModal form');
+                document.getElementById('deleteId').value = id;
+                deleteForm.action = `/dashboard/scholarship/${id}?_method=DELETE`;
+                document.getElementById('deleteModal').classList.remove('hidden');
+            });
+        });
+
+        // Global close modal
+        window.closeModal = function (modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        };
+
+        // === Bagian untuk Tambah Beasiswa ===
+        const degreeCheckboxesCreate = document.querySelectorAll('.checkbox-degree-create');
+        const degreeInputCreate = document.getElementById('degree_requirement_create');
+
+        function updateDegreeCreateField() {
+            const selected = Array.from(degreeCheckboxesCreate)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+            degreeInputCreate.value = selected.join('/');
+        }
+
+        degreeCheckboxesCreate.forEach(cb => {
+            cb.addEventListener('change', updateDegreeCreateField);
+        });
+
+        // Reset checkbox saat modal Tambah dibuka
+        document.getElementById('addScholarshipBtn')?.addEventListener('click', () => {
+            degreeCheckboxesCreate.forEach(cb => cb.checked = false);
+            updateDegreeCreateField();
+        });
+    });
+</script>

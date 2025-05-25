@@ -1,47 +1,91 @@
 <div class="mt-8 bg-white rounded-xl shadow-lg overflow-hidden p-6">
-  <div class="flex items-center justify-between border-b pb-4 mb-4">
-    <h2 class="text-2xl font-semibold text-gray-800">Daftar Pengumuman</h2>
-  </div>
+    <div class="flex items-center justify-between border-b pb-4 mb-4">
+        <h2 class="text-2xl font-semibold text-gray-800">Daftar Pengumuman</h2>
+    </div>
 
-  <div class="overflow-x-auto">
-    <table class="min-w-full table-auto text-sm text-left text-gray-700">
-      <thead class="bg-gray-100 uppercase text-xs text-gray-600">
-        <tr>
-          <th class="px-6 py-3">No</th>
-          <th class="px-6 py-3">Judul</th>
-          <th class="px-6 py-3">Deskripsi</th>
-          <th class="px-6 py-3">Aksi</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-200">
-        <% announcements.forEach((announcement, index) => { %>
-        <tr class="hover:bg-gray-50 transition">
-          <td class="px-6 py-4 font-medium"><%= index + 1 %></td>
-          <td class="px-6 py-4"><%= announcement.title %></td>
-          <td class="px-6 py-4"><%= announcement.description %></td>
-          <td class="px-6 py-4 flex gap-2">
-            <!-- Tombol Edit -->
-            <button
-              class="update-btn px-3 py-1 rounded bg-yellow-100 text-yellow-700 hover:bg-yellow-200 transition"
-              title="Edit"
-              data-id="<%= announcement.id %>"
-              data-announcement="<%= JSON.stringify(announcement).replace(/"/g, '&quot;') %>"
-            >
-              <i class="fas fa-edit"></i>
-            </button>
-
-            <!-- Tombol Delete -->
-            <button
-              class="delete-btn px-3 py-1 rounded bg-red-100 text-red-700 hover:bg-red-200 transition"
-              title="Hapus"
-              data-id="<%= announcement.id %>"
-            >
-              <i class="fas fa-trash"></i>
-            </button>
-          </td>
-        </tr>
-        <% }) %>
-      </tbody>
-    </table>
-  </div>
+    <div class="overflow-x-auto">
+        <table class="min-w-full table-auto text-sm text-left text-gray-700">
+            <thead class="bg-gray-100 uppercase text-xs text-gray-600">
+            <tr>
+                <th class="px-6 py-3">No</th>
+                <th class="px-6 py-3">Judul</th>
+                <th class="px-6 py-3">Deskripsi</th>
+                <th class="px-6 py-3">Aksi</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+            <% announcements.forEach((announcement, index) => { %>
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-6 py-4 font-medium"><%= index + 1 %></td>
+                    <td class="px-6 py-4"><%= announcement.title %></td>
+                    <td class="px-6 py-4"><%= announcement.description %></td>
+                    <td class="px-6 py-4 flex gap-2">
+                        <button
+                                class="update-btn px-3 py-1 rounded bg-yellow-100 text-yellow-700 hover:bg-yellow-200 transition"
+                                title="Edit"
+                                data-id="<%= announcement.id %>"
+                                data-announcement="<%= JSON.stringify(announcement).replace(/"/g, '&quot;') %>"
+                        >
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button
+                                class="delete-btn px-3 py-1 rounded bg-red-100 text-red-700 hover:bg-red-200 transition"
+                                title="Hapus"
+                                data-id="<%= announcement.id %>"
+                        >
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<%- include('../../layouts/components/_editAnnouncementModal') %>
+<%- include('../../layouts/components/_deleteModal') %>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function populateForm(data) {
+            document.getElementById("title").value = data.title || "";
+            document.getElementById("description").value = data.description || "";
+            document.getElementById("content").value = data.content || "";
+
+            const fileDisplay = document.getElementById("currentFile");
+            fileDisplay.innerText = data.file ? `File saat ini: ${data.file}` : "";
+        }
+
+        document.querySelectorAll('.update-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                try {
+                    const data = JSON.parse(btn.dataset.announcement.replace(/&quot;/g, '"'));
+                    document.getElementById('updateId').value = data.id;
+                    populateForm(data);
+
+                    const form = document.getElementById('updateForm');
+                    form.action = `/dashboard/announcement/${data.id}?_method=PUT`;
+
+                    document.getElementById('updateModal').classList.remove('hidden');
+                } catch (e) {
+                    console.error('Gagal parsing data announcement:', e);
+                }
+            });
+        });
+
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.dataset.id;
+                const deleteForm = document.querySelector('#deleteModal form');
+                document.getElementById('deleteId').value = id;
+                deleteForm.action = `/dashboard/announcement/${id}?_method=DELETE`;
+                document.getElementById('deleteModal').classList.remove('hidden');
+            });
+        });
+
+        window.closeModal = function (modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        };
+    });
+</script>
