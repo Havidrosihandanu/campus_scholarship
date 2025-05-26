@@ -1,7 +1,7 @@
 <div class="grid md:grid-cols-3 gap-6">
     <div class="bg-white rounded-xl shadow-md p-4 md:col-span-2 overflow-x-auto">
         <div class="md:hidden mb-4">
-            <h2 class="text-lg font-semibold text-gray-700">Daftar Beasiswa</h2>
+            <h2 class="text-lg font-semibold text-gray-700 my-5">Daftar Beasiswa</h2>
         </div>
 
         <div class="min-w-full overflow-x-auto">
@@ -15,7 +15,7 @@
                     <tr>
                         <th class="px-6 py-3">No</th>
                         <th class="px-6 py-3">Nama Beasiswa</th>
-                        <th class="px-6 py-3">Tipe</th>
+                        <th class="px-6 py-3">Tingkat</th>
                         <th class="px-6 py-3">Tanggal Tutup</th>
                         <th class="px-6 py-3">Status</th>
                     </tr>
@@ -71,7 +71,7 @@
 
             <div class="p-4 space-y-3">
                 <% announcements.forEach((announcement) => { %>
-                <a href="#" class="block group transition duration-150 ease-in-out">
+                <a href="/portal/announcement/<%= announcement.id %>" class="block group transition duration-150 ease-in-out">
                     <div
                         class="bg-white p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-sm transition duration-150 ease-in-out group-hover:bg-blue-50"
                     >

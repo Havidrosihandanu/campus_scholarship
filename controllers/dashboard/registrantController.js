@@ -13,8 +13,6 @@ exports.registrant = (req, res) => {
         title: "Pendaftar",
         layout: "./layouts/dashboard",
         currentPage: "registrant",
-        scripts: "",
-        stylesheets: "",
         updateId: null,
         deleteId: null,
       });
@@ -23,8 +21,6 @@ exports.registrant = (req, res) => {
 };
 
 exports.updateRegistrant = (req, res) => {
-  // console.log("BODY:", req.body);
-  // console.log("FILES:", req.files);
   const id = req.params.id || req.body.id;
 
   const {
@@ -40,21 +36,14 @@ exports.updateRegistrant = (req, res) => {
     status,
   } = req.body;
 
-  // Ambil file dari req.files
   const letterFile = req.files?.letter_of_recomendation?.[0] || null;
   const supportFile = req.files?.supporting_file?.[0] || null;
-
-  // console.log("📁 File rekomendasi:", letterFile);
-  // console.log("📁 File pendukung:", supportFile);
-
-  // Validasi input
   if (!id || !full_name || !email) {
     return res
       .status(400)
       .json({ success: false, message: "Data tidak lengkap" });
   }
 
-  // Simpan file jika ada
   let letterFileName = null;
   let supportFileName = null;
 
@@ -74,7 +63,6 @@ exports.updateRegistrant = (req, res) => {
     fs.writeFileSync(path.join(uploadDir, supportFileName), supportFile.buffer);
   }
 
-  // Siapkan query update
   const baseQuery = `
     UPDATE registrant_data 
     SET 
@@ -92,8 +80,6 @@ exports.updateRegistrant = (req, res) => {
       ${supportFileName ? ", supporting_file = ?" : ""}
     WHERE id = ?
   `;
-
-  // Buat values dinamis tergantung file yang diupload
   const values = [
     full_name,
     domicile,
@@ -109,7 +95,7 @@ exports.updateRegistrant = (req, res) => {
 
   if (letterFileName) values.push(letterFileName);
   if (supportFileName) values.push(supportFileName);
-  values.push(id); // id harus paling akhir
+  values.push(id);
 
   db.query(baseQuery, values, (err, results) => {
     if (err) {

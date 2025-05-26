@@ -1,44 +1,53 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
   <div class="bg-white p-6 rounded-lg shadow-lg">
     <h3 class="text-gray-500 text-sm font-semibold">Total Pendaftar</h3>
-    <p class="text-3xl font-bold text-sky-600 mt-2">1,234</p>
+    <p class="text-3xl font-bold text-sky-600 mt-2">
+      <%= totalRegistrant ? totalRegistrant : 0 %>
+    </p>
   </div>
   <div class="bg-white p-6 rounded-lg shadow-lg">
     <h3 class="text-gray-500 text-sm font-semibold">Total Beasiswa</h3>
-    <p class="text-3xl font-bold text-green-600 mt-2">892</p>
+    <p class="text-3xl font-bold text-green-600 mt-2">
+      <%= totalScholarship ? totalScholarship : 0 %>
+    </p>
   </div>
   <div class="bg-white p-6 rounded-lg shadow-lg">
     <h3 class="text-gray-500 text-sm font-semibold">Beasiswa In Progress</h3>
-    <p class="text-3xl font-bold text-amber-600 mt-2">342</p>
+    <p class="text-3xl font-bold text-amber-600 mt-2">
+      <%= totalScholarshipActive ? totalScholarshipActive : 0 %>
+    </p>
   </div>
 </div>
+
 <div class="mt-8 bg-white p-6 rounded-lg shadow-lg">
   <canvas id="registrationsChart" class="w-full h-96"></canvas>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const ctx = document.getElementById('registrationsChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
-            datasets: [{
-                label: 'Pendaftar Per Bulan',
-                data: [65, 59, 80, 81, 56, 55],
-                borderColor: '#0284c7',
-                tension: 0.1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-});
+  document.addEventListener('DOMContentLoaded', function() {
+      const ctx = document.getElementById('registrationsChart').getContext('2d');
+      const monthlyData = <%= JSON.stringify(monthlyRegistrants) %>; // Inject data from server
+      new Chart(ctx, {
+          type: 'line',
+          data: {
+              labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+              datasets: [{
+                  label: 'Pendaftar Per Bulan',
+                  data: monthlyData,
+                  borderColor: '#0284c7',
+                  tension: 0.1,
+                  fill: false // Ensures the chart line is not filled
+              }]
+          },
+          options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+  });
 </script>

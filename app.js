@@ -2,6 +2,7 @@ const express = require("express");
 const methodOverride = require("method-override");
 const portalRoutes = require("./routes/portalRoute");
 const dashboardRoutes = require("./routes/dashboardRoute");
+const authRoutes = require("./routes/authRoute");
 const path = require("path");
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
@@ -21,10 +22,20 @@ app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts);
 
+const session = require("express-session");
+
+// Middleware for session management
+app.use(session({
+    secret: "campus_scholarship",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } 
+}));
 
 // Routes
 app.use("/dashboard", dashboardRoutes);
 app.use("/portal", portalRoutes);
+app.use("/auth", authRoutes);
 
 // Error handling middleware
 // app.use((err, req, res, next) => {

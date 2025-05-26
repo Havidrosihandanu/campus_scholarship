@@ -11,8 +11,6 @@ exports.scholarship = (req, res) => {
         scholarships: result,
         title: "Beasiswa",
         currentPage: "scholarship",
-        scripts: "",
-        stylesheets: "",
       });
     }
   });
@@ -57,38 +55,37 @@ exports.createScholarship = (req, res) => {
   db.query(query, values, (err, results) => {
     if (err) {
       console.error("❌ Error SQL:", err);
-      return res.status(500).json({ success: false, message: "Gagal tambah data" });
+      return res
+        .status(500)
+        .json({ success: false, message: "Gagal tambah data" });
     }
 
     res.redirect("/dashboard/scholarship");
   });
 };
 
-
 exports.scholarshipByDegree = (req, res) => {
   const degree = req.params.degree;
   db.query(
-      "SELECT * FROM scholarship WHERE degree_requirement LIKE ?",
-      [`%${degree}%`],
-      (err, result) => {
-        if (err) {
-          console.log(err);
-          return res.status(500).send("Gagal mengambil data beasiswa berdasarkan jenjang.");
-        }
-
-        res.render("dashboard/scholarship", {
-          layout: "./layouts/dashboard",
-          scholarships: result,
-          title: `Beasiswa ${degree}`,
-          currentPage: "scholarship",
-          scripts: "",
-          stylesheets: "",
-        });
+    "SELECT * FROM scholarship WHERE degree_requirement LIKE ?",
+    [`%${degree}%`],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        return res
+          .status(500)
+          .send("Gagal mengambil data beasiswa berdasarkan jenjang.");
       }
+
+      res.render("dashboard/scholarship", {
+        layout: "./layouts/dashboard",
+        scholarships: result,
+        title: `Beasiswa ${degree}`,
+        currentPage: "scholarship",
+      });
+    }
   );
 };
-
-
 
 exports.updateScholarship = (req, res) => {
   const id = req.params.id || req.body.id;
@@ -105,10 +102,6 @@ exports.updateScholarship = (req, res) => {
     degree_requirement,
     status,
   } = req.body;
-
-  // Debug
-  // console.log("📦 req.body:", req.body);
-
 
   const query = `
     UPDATE scholarship SET
@@ -142,18 +135,20 @@ exports.updateScholarship = (req, res) => {
   db.query(query, values, (err, results) => {
     if (err) {
       console.error("❌ Error SQL:", err);
-      return res.status(500).json({ success: false, message: "Gagal update data" });
+      return res
+        .status(500)
+        .json({ success: false, message: "Gagal update data" });
     }
 
     if (results.affectedRows === 0) {
-      return res.status(404).json({ success: false, message: "Data tidak ditemukan" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Data tidak ditemukan" });
     }
 
     res.redirect("/dashboard/scholarship");
   });
 };
-
-
 
 exports.deleteScholarship = (req, res) => {
   const { id } = req.body;
@@ -167,10 +162,9 @@ exports.deleteScholarship = (req, res) => {
     if (err) {
       console.error(err);
       return res
-          .status(500)
-          .json({ success: false, message: "Gagal menghapus beasiswa" });
+        .status(500)
+        .json({ success: false, message: "Gagal menghapus beasiswa" });
     }
     res.redirect("/dashboard/scholarship");
   });
 };
-

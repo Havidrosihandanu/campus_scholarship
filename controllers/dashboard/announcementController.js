@@ -13,8 +13,6 @@ exports.announcement = (req, res) => {
         announcements: result,
         title: "Pengumuman",
         currentPage: "announcement",
-        scripts: "",
-        stylesheets: "",
       });
     }
   });
@@ -23,7 +21,7 @@ exports.announcement = (req, res) => {
 exports.updateAnnouncement = (req, res) => {
   const id = req.params.id || req.body.id;
   const { title, description, content } = req.body;
-  const file = req.file; // untuk single file
+  const file = req.file;
 
   if (!id || !title || !description) {
     return res.status(400).send("Data tidak lengkap");
@@ -41,7 +39,6 @@ exports.updateAnnouncement = (req, res) => {
     fs.writeFileSync(path.join(uploadDir, fileName), file.buffer);
   }
 
-  // Query dinamis
   let query = `
     UPDATE announcement 
     SET title = ?, description = ?, content = ?

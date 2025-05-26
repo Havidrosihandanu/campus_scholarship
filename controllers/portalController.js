@@ -1,11 +1,12 @@
 const db = require("../config/db");
 const multer = require("multer");
 const path = require("path");
+const { announcement } = require("./dashboard/announcementController");
 
 // Konfigurasi Multer untuk upload file
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../uploads/"));
+    cb(null, path.join(__dirname, "/../public/uploads"));
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -66,25 +67,22 @@ exports.scholarshipDetail = (req, res) => {
         currentPage: "detailScholarship",
         layout: "./layouts/portal",
         scholarship: scholarshipData,
-        scripts: "",
-        stylesheets: "",
       });
     }
   );
 };
 
-  exports.scholarshipForm = (req, res) => {
-    const id = req.params.id;
-    res.render("portal/scholarshipForm", {
-      title: "Form Beasiswa",
-      currentPage: "scholarshipForm",
-      layout: "./layouts/portal",
-      scholarshipID: id,
-      scripts: "",
-      stylesheets: "",
-    });
-  };
-
+exports.scholarshipForm = (req, res) => {
+  const id = req.params.id;
+  res.render("portal/scholarshipForm", {
+    title: "Form Beasiswa",
+    currentPage: "scholarshipForm",
+    layout: "./layouts/portal",
+    scholarshipID: id,
+    scripts: "",
+    stylesheets: "",
+  });
+};
 
 exports.submitScholarshipForm = [
   upload.fields([
@@ -142,7 +140,7 @@ exports.submitScholarshipForm = [
             console.error("Gagal menyimpan data:", err);
             return res.redirect("/portal?success=false");
           }
-         res.redirect("/portal?success=true");
+          res.redirect("/portal?success=true");
         }
       );
     } catch (error) {
@@ -153,9 +151,35 @@ exports.submitScholarshipForm = [
 ];
 
 exports.announcement = (req, res) => {
-  res.render("portal/announcement");
+  const id = req.params.id;
+
+  db.query(
+    "SELECT * FROM announcement WHERE id = ?",
+    [id],
+    (err, announcementById) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Gagal mengambil data pengumuman.");
+      }
+
+      const announcementData =
+        announcementById.length > 0 ? announcementById[0] : null;
+
+      res.render("portal/announcement", {
+        title: "Pengumuman",
+        currentPage: "announcement",
+        layout: "./layouts/portal",
+        announcement: announcementData,
+      });
+    }
+  );
 };
 
 exports.aboutUs = (req, res) => {
-  res.render("portal/aboutUs");
+  res.render("portal/aboutUs", {
+    title: "Tentang Kami",
+    layout: "./layouts/portal",
+    scripts: "",
+    stylesheets: "",
+  });
 };

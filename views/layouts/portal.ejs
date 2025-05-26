@@ -24,11 +24,10 @@
         transition: max-height 0.3s ease-in;
       }
     </style>
-    <%- stylesheets %>
   </head>
   <body class="bg-gray-50 min-h-screen flex flex-col">
     <!-- Header -->
-    <header class="bg-blue-600 text-white sticky top-0 z-50 shadow-lg">
+    <header class="bg-blue-900 text-white sticky top-0 z-50 shadow-lg">
       <div
         class="container mx-auto px-4 py-4 flex items-center justify-between"
       >
@@ -57,8 +56,12 @@
 
         <!-- Desktop Navigation -->
         <nav class="hidden md:flex space-x-6">
-          <a href="/" class="hover:text-blue-200 transition-colors">Beranda</a>
-          <a href="/about" class="hover:text-blue-200 transition-colors"
+          <a href="/portal" class="hover:text-blue-200 transition-colors"
+            >Beranda</a
+          >
+          <a
+            href="/portal/about-us"
+            class="hover:text-blue-200 transition-colors"
             >Tentang Kami</a
           >
         </nav>
@@ -103,7 +106,6 @@
     </footer>
 
     <script>
-      // Mobile Menu Toggle
       const hamburgerBtn = document.getElementById("hamburgerBtn");
       const mobileMenu = document.getElementById("mobileMenu");
 
@@ -111,7 +113,6 @@
         mobileMenu.classList.toggle("active");
       });
 
-      // Close menu when clicking outside
       document.addEventListener("click", (e) => {
         if (
           !hamburgerBtn.contains(e.target) &&
@@ -121,6 +122,5 @@
         }
       });
     </script>
-    <%- scripts %>
   </body>
 </html>

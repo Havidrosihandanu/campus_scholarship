@@ -9,8 +9,6 @@ exports.setting = (req, res) => {
         settings: result,
         title: "Pengaturan",
         currentPage: "setting",
-        scripts: "",
-        stylesheets: "",
       });
     } else {
       res.render("dashboard/setting", {
@@ -18,8 +16,6 @@ exports.setting = (req, res) => {
         settings: result,
         title: "Pengaturan",
         currentPage: "setting",
-        scripts: "",
-        stylesheets: "",
       });
     }
   });
