@@ -1,59 +1,201 @@
- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <!-- Profile Info -->
-    <div class="bg-white rounded-xl shadow-lg p-6">
-      <div class="flex items-center justify-center mb-6">
-        <div class="bg-slate-700 text-white p-4 rounded-full text-2xl">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-            viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M5.121 17.804A3 3 0 017 17h10a3 3 0 012.879 3.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-        </div>
-      </div>
-      <div class="space-y-4 text-slate-800">
-        <div>
-          <p class="text-sm font-semibold text-gray-500">NAMA :</p>
-          <p class="text-lg font-bold">ADMIN BEASISWA SIGMA</p>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-gray-500">EMAIL :</p>
-          <p class="text-lg font-bold">adminbeasiswasigma@gmail.com</p>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-gray-500">ROLE :</p>
-          <p class="text-lg font-bold">ADMIN</p>
-        </div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <!-- Profile Info -->
+  <div class="bg-white rounded-xl shadow-lg p-6">
+    <div class="flex items-center justify-center mb-6">
+      <div class="bg-slate-700 text-white p-4 rounded-full text-2xl">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5.121 17.804A3 3 0 017 17h10a3 3 0 012.879 3.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+          />
+        </svg>
       </div>
     </div>
-
-    <!-- Change Password -->
-    <div class="bg-white rounded-xl shadow-lg p-6">
-      <h2 class="text-2xl font-bold text-slate-800 mb-6">Ubah Password</h2>
-      <form action="/ubah-password" method="POST" class="space-y-4">
-        <div>
-          <label class="block mb-1 font-semibold text-slate-700">Password Lama :</label>
-          <input type="password" name="oldPassword"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-            placeholder="Current password" />
-        </div>
-        <div>
-          <label class="block mb-1 font-semibold text-slate-700">Password Baru :</label>
-          <input type="password" name="newPassword"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-            placeholder="New password" />
-        </div>
-        <div>
-          <label class="block mb-1 font-semibold text-slate-700">Password Konfirmasi :</label>
-          <input type="password" name="confirmPassword"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-            placeholder="New password" />
-        </div>
-        <div class="text-right">
-          <button type="submit"
-            class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-semibold">
-            SIMPAN
-          </button>
-        </div>
-      </form>
+    <div class="space-y-4 text-slate-800">
+      <div>
+        <p class="text-sm font-semibold text-gray-500">NAMA :</p>
+        <p class="text-lg font-bold"><%= setting.name %></p>
+      </div>
+      <div>
+        <p class="text-sm font-semibold text-gray-500">EMAIL :</p>
+        <p class="text-lg font-bold"><%= setting.email %></p>
+      </div>
+      <div>
+        <p class="text-sm font-semibold text-gray-500">ROLE :</p>
+        <p class="text-lg font-bold">ADMIN</p>
+      </div>
     </div>
   </div>
+
+  <!-- Change Password -->
+  <div class="bg-white rounded-xl shadow-lg p-6">
+    <h2 class="text-2xl font-bold text-slate-800 mb-6">Ubah Password</h2>
+    <form
+      action="/dashboard/setting/change-password"
+      method="POST"
+      class="space-y-4"
+    >
+      <div>
+        <label class="block mb-1 font-semibold text-slate-700"
+          >Password Lama :</label
+        >
+        <input
+          type="password"
+          name="oldPassword"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
+          placeholder="Masukkan password lama"
+          required
+        />
+      </div>
+      <div>
+        <label class="block mb-1 font-semibold text-slate-700"
+          >Password Baru :</label
+        >
+        <input
+          type="password"
+          name="newPassword"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
+          placeholder="Masukkan password baru"
+          required
+        />
+      </div>
+      <div>
+        <label class="block mb-1 font-semibold text-slate-700"
+          >Password Konfirmasi :</label
+        >
+        <input
+          type="password"
+          name="confirmPassword"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
+          placeholder="Konfirmasi password baru"
+          required
+        />
+      </div>
+      <div class="text-right">
+        <button
+          type="submit"
+          class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-semibold"
+        >
+          SIMPAN
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Success Modal -->
+  <div
+    id="successModal"
+    class="fixed z-10 inset-0 overflow-y-auto hidden"
+    aria-labelledby="modal-title"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full"
+      >
+        <div class="px-4 py-5">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Password Berhasil Diubah!
+          </h3>
+          <div class="mt-2">
+            <p class="text-sm text-gray-500">
+              Password Anda telah berhasil diubah.
+            </p>
+          </div>
+        </div>
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <button
+            onclick="closeSuccessModal()"
+            type="button"
+            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none"
+          >
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Modal -->
+  <div
+    id="errorModal"
+    class="fixed z-10 inset-0 overflow-y-auto hidden"
+    aria-labelledby="modal-title"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full"
+      >
+        <div class="px-4 py-5">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Gagal Mengubah Password!
+          </h3>
+          <div class="mt-2">
+            <p class="text-sm text-gray-500" id="errorMessage">
+              Terjadi kesalahan saat mengubah password.
+            </p>
+          </div>
+        </div>
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <button
+            onclick="closeErrorModal()"
+            type="button"
+            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none"
+          >
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // Function to close success modal
+  function closeSuccessModal() {
+    document.getElementById("successModal").classList.add("hidden");
+    // Redirect setelah menutup modal
+    window.location.href = "/dashboard/setting";
+  }
+
+  // Function to close error modal
+  function closeErrorModal() {
+    document.getElementById("errorModal").classList.add("hidden");
+    // Redirect setelah menutup modal
+    window.location.href = "/dashboard/setting";
+  }
+
+  // Show modal based on success or error
+  document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const success = urlParams.get("success");
+    const error = urlParams.get("error");
+
+    if (success === "true") {
+      document.getElementById("successModal").classList.remove("hidden");
+    } else if (error) {
+      document.getElementById("errorMessage").innerText = error;
+      document.getElementById("errorModal").classList.remove("hidden");
+    }
+  });
+</script>
+
+</div>
