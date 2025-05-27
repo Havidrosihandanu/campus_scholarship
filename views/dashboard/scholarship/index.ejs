@@ -29,7 +29,7 @@
                     <td class="px-6 py-4"><%= scholarship.name %></td>
                     <td class="px-6 py-4"><%= scholarship.degree_requirement %></td>
                     <td class="px-6 py-4"><%= scholarship.deadline %></td>
-                    <td class="px-6 py-4"><%= scholarship.status %></td>
+                    <td class="px-6 py-4 <%= scholarship.status === 'Aktif' ? 'text-green-600' : 'text-red-600' %>"><%= scholarship.status %></td>
                     <td class="px-6 py-4 flex gap-2">
                         <!-- Tombol Edit -->
                         <button
