@@ -6,7 +6,11 @@ const authRoutes = require("./routes/authRoute");
 const path = require("path");
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
-const multer = require("multer");
+const session = require("express-session");
+const { isAuthenticated, isNotAuthenticated } = require("./middlewares/authMiddleware");
+const authController = require("./controllers/authController");
+const flash = require("connect-flash");
+app.use(flash());
 
 // Middleware
 app.use(express.json());
@@ -22,8 +26,6 @@ app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts);
 
-const session = require("express-session");
-
 // Middleware for session management
 app.use(session({
     secret: "campus_scholarship",
@@ -33,9 +35,10 @@ app.use(session({
 }));
 
 // Routes
-app.use("/dashboard", dashboardRoutes);
+app.use("/dashboard", isAuthenticated, dashboardRoutes);
 app.use("/portal", portalRoutes);
-app.use("/auth", authRoutes);
+app.use("/auth", isNotAuthenticated, authRoutes);
+app.use("/logout", isAuthenticated, authController.logout);
 
 // Error handling middleware
 // app.use((err, req, res, next) => {
