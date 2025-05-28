@@ -17,9 +17,10 @@ const { Pool } = require('pg');
 
 app.get('/', async (req, res) => {
   try {
-    const result = await pool.query('SELECT NOW() AS time');
-    res.json({ status: 'OK', time: result.rows[0].time });
+    const { rows } = await pool.query('SELECT NOW() AS time');
+    res.json({ time: rows[0].time });
   } catch (err) {
+    console.error('Database error:', err);
     res.status(500).json({ error: err.message });
   }
 });
