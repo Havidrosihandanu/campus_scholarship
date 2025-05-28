@@ -12,7 +12,6 @@ const authController = require("./controllers/authController");
 const flash = require("connect-flash");
 app.use(flash());
 require('dotenv').config();
-const express = require('express');
 const { Pool } = require('pg');
 
 app.get('/', async (req, res) => {
