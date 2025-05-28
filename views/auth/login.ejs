@@ -1,7 +1,16 @@
 <div class="bg-white shadow-md rounded-lg p-8 w-96">
   <h2 class="text-2xl font-semibold text-blue-600 mb-6 text-center">LOGIN</h2>
 
-  <form>
+  <% if (messages.error) { %>
+  <div
+    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+    role="alert"
+  >
+    <span class="block sm:inline"><%- messages.error %></span>
+  </div>
+  <% } %>
+
+  <form action="/auth/login" method="POST">
     <div class="mb-4">
       <label
         for="username"
@@ -11,7 +20,7 @@
       <input
         type="text"
         id="username"
-        name="username"
+        name="email"
         required
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:ring-blue-500"
       />
@@ -39,9 +48,7 @@
   </form>
 
   <p class="mt-4 text-center text-gray-600 text-sm">
-    <a href="#" class="text-blue-500 hover:text-blue-700"
-      >Lupa Password ?</a
-    >
+    <a href="#" class="text-blue-500 hover:text-blue-700">Lupa Password ?</a>
   </p>
 
   <p class="mt-8 text-center text-gray-400 text-sm">sigma scholarship</p>

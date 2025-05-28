@@ -1,50 +1,52 @@
 const db = require("../config/db");
-const bcrypt = require("bcrypt"); 
+const bcrypt = require("bcrypt");
 
 exports.login = (req, res) => {
-    res.render("auth/login", {
-        title: "Login",
-        layout: "./layouts/auth",
-        scripts: "",
-        stylesheets: "",
-    });
+  res.render("auth/login", {
+    title: "Login",
+    layout: "./layouts/auth",
+    scripts: "",
+    stylesheets: "",
+    messages: req.flash(),
+  });
 };
 
 exports.postLogin = async (req, res) => {
-    const { username, password } = req.body; 
+  const { email, password } = req.body;
 
-    
-    const query = "SELECT * FROM users WHERE email = ?";
-    
-    db.query(query, [username], async (err, results) => {
-        if (err) {
-            console.error("Database error:", err);
-            return res.status(500).send("Internal Server Error");
-        }
+  const query = "SELECT * FROM users WHERE email = ?";
 
-        if (results.length === 0) {
-            return res.status(401).send("Invalid username or password");
-        }
+  db.query(query, [email], async (err, results) => {
+    if (err) {
+      console.error("Database error:", err);
+      req.flash("error", "Internal Server Error");
+      return res.redirect("/auth/login");
+    }
 
-        const user = results[0];
+    if (results.length === 0) {
+      req.flash("error", "Email atau kata sandi tidak valid");
+      return res.redirect("/auth/login");
+    }
 
-        
-        const match = await bcrypt.compare(password, user.password_hash);
-        if (!match) {
-            return res.status(401).send("Invalid username or password");
-        }
+    const user = results[0];
+    const match = await bcrypt.compare(password, user.password_hash);
+    if (!match) {
+      req.flash("error", "Email atau kata sandi tidak cocok");
+      return res.redirect("/auth/login");
+    }
 
-        
-        req.session.userId = user.id; 
-        res.redirect("/dashboard"); 
-    });
+    req.session.userId = user.id;
+    res.redirect("/dashboard");
+  });
 };
 
 exports.logout = (req, res) => {
-    req.session.destroy(err => {
-        if (err) {
-            return console.error("Logout error:", err);
-        }
-        res.redirect("/auth/login"); 
-    });
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Logout error:", err);
+      return res.status(500).send("Internal Server Error");
+    }
+    console.log("User logged out successfully");
+    res.redirect("/auth/login");
+  });
 };

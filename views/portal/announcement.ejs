@@ -32,8 +32,8 @@
   <p><%= announcement.content %></p>
   <p>
     unduh file <% if(announcement.file) { %><a
-      class="text-blue-500"
-      href="/<%= announcement.file %>"
+      class="text-blue-500" href="/uploads/<%= announcement.file %>"
+      download="/uploads/<%= announcement.file %>"
       ><%= announcement.file %></a
     ><% } else { %>-<% } %>
   </p>

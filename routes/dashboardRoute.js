@@ -7,7 +7,7 @@ const scholarshipController = require("../controllers/dashboard/scholarshipContr
 const settingController = require("../controllers/dashboard/settingControlller");
 const announcementController = require("../controllers/dashboard/announcementController");
 
-const storage = multer.memoryStorage(); // Atau pakai diskStorage jika mau simpan ke folder
+const storage = multer.memoryStorage(); 
 
 const upload = multer({
     storage: storage,
@@ -42,6 +42,6 @@ router.delete("/announcement/:id", announcementController.deleteAnnouncement);
 
 // Route Settings
 router.get("/setting", settingController.setting);
-router.put("/setting", settingController.updateSetting);
+router.post("/setting/change-password", settingController.updateSetting);
 
 module.exports = router;

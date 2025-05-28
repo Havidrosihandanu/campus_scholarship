@@ -62,7 +62,7 @@ VALUES
     (
         'Admin Sigma',
         'admin@beasiswasigma.com',
-        '$2b$10$ZGYd/9g2vfJtnqqT6V4vuu1kAEtDT3d5dwGU5DxxpeJxJTMerPs0K' //admin123
+        '$2b$10$ZGYd/9g2vfJtnqqT6V4vuu1kAEtDT3d5dwGU5DxxpeJxJTMerPs0K' / / admin123
     );
 
 INSERT INTO
@@ -72,14 +72,14 @@ VALUES
         'Pembukaan Pendaftaran Beasiswa Unggulan Sigma 2025',
         'Pendaftaran Beasiswa Unggulan Sigma untuk tahun 2025 telah dibuka!',
         'Kami dengan bangga mengumumkan pembukaan pendaftaran Beasiswa Unggulan Sigma 2025. Beasiswa ini ditujukan bagi mahasiswa berprestasi dari berbagai jenjang pendidikan. Jangan lewatkan kesempatan ini!',
-        'pengumuman_unggulan_2025.pdf',
+        'announcement-file.pdf',
         '2025-05-20'
     ),
     (
         'Tips Sukses Wawancara Beasiswa',
         'Pelajari tips dan trik untuk menghadapi wawancara beasiswa dengan percaya diri.',
         'Wawancara adalah tahap krusial. Pastikan Anda mempersiapkan diri dengan baik, termasuk riset tentang beasiswa dan institusi, serta berlatih menjawab pertanyaan umum.',
-        'tips_wawancara.pdf',
+        'announcement-file.pdf',
         '2025-05-18 14'
     ),
     (
@@ -100,7 +100,7 @@ VALUES
         'Pengumuman Hasil Seleksi Administrasi Beasiswa IT',
         'Daftar nama peserta yang lolos seleksi administrasi Beasiswa Talenta IT.',
         'Selamat kepada para peserta yang berhasil lolos seleksi administrasi Beasiswa Talenta IT. Tahap selanjutnya adalah wawancara. Silakan cek email Anda untuk detail lebih lanjut.',
-        'hasil_seleksi_it.xlsx',
+        'announcement-file.pdf',
         '2025-05-10'
     ),
     (
@@ -114,7 +114,7 @@ VALUES
         'Jadwal Wawancara Beasiswa Unggulan Tahap 1',
         'Informasi jadwal wawancara untuk kandidat Beasiswa Unggulan Tahap 1.',
         'Para kandidat yang lolos seleksi administrasi Beasiswa Unggulan Tahap 1, silakan cek jadwal wawancara Anda di lampiran. Pastikan Anda hadir tepat waktu.',
-        'jadwal_wawancara_unggulan.pdf',
+        'announcement-file.pdf',
         '2025-05-05'
     ),
     (
@@ -135,7 +135,7 @@ VALUES
         'Syarat & Ketentuan Umum Beasiswa Sigma',
         'Pembaruan syarat dan ketentuan umum untuk semua program beasiswa.',
         'Demi transparansi dan kejelasan, kami telah memperbarui syarat dan ketentuan umum yang berlaku untuk semua program beasiswa di platform Beasiswa Sigma.',
-        'syarat_ketentuan_umum.pdf',
+        'announcement-file.pdf',
         '2025-04-28'
     );
 
