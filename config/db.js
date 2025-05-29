@@ -14,19 +14,10 @@
 // })
 // module.exports = db;
 
-const { Pool } = require('pg');
-
-const db = new Pool({
-    host: 'db.xclrmndtpwpnehczcnlm.supabase.co',
-    user: 'postgres',            
-    password: 'campus_scholarship123', 
-    database: 'postgres',        
-    port: 5432                    // Port untuk PostgreSQL
+const pool = new Pool({
+  connectionString: `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
+  ssl: { rejectUnauthorized: false },
+  max: 15, // Sesuai dengan Pool Size Supabase Nano
+  idleTimeoutMillis: 10000,
+  connectionTimeoutMillis: 5000
 });
-
-db.connect((err) => {
-    if (err) throw err;
-    console.log("db success connected");
-});
-
-module.exports = db;
