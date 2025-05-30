@@ -1,54 +1,67 @@
-<div class="mt-8 bg-white rounded-xl shadow-lg overflow-hidden p-6">
-    <div class="flex items-center justify-between border-b pb-4 mb-4">
-        <h2 class="text-2xl font-semibold text-gray-800">Daftar Beasiswa</h2>
+<div class="mt-10 bg-white rounded-3xl shadow-2xl p-8">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-gray-200 pb-6 mb-6">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 flex items-center gap-2">
+            Daftar Beasiswa
+        </h2>
         <button
                 id="addScholarshipBtn"
                 onclick="document.getElementById('createScholarshipModal').classList.remove('hidden')"
-                class="px-5 py-2 rounded-lg bg-blue-800 text-white shadow-md hover:bg-blue-900 transition"
+                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-semibold shadow-md hover:shadow-lg transition-all"
         >
-            + Tambah Beasiswa
+            <i class="fas fa-plus"></i>
+            Tambah Beasiswa
         </button>
     </div>
 
-    <div class="overflow-x-auto">
-        <table class="min-w-full table-auto text-sm text-left text-gray-700">
-            <thead class="bg-gray-100 uppercase text-xs text-gray-600">
+    <!-- TABLE -->
+    <div class="overflow-x-auto rounded-xl shadow-sm">
+        <table class="min-w-full text-sm text-left text-gray-800">
+            <thead class="bg-gray-100 text-gray-700 uppercase text-xs tracking-wider">
             <tr>
-                <th class="px-6 py-3">No</th>
-                <th class="px-6 py-3">Nama Beasiswa</th>
-                <th class="px-6 py-3">Tingkat</th>
-                <th class="px-6 py-3">Tanggal Tutup</th>
-                <th class="px-6 py-3">Status</th>
-                <th class="px-6 py-3">Aksi</th>
+                <th class="px-6 py-4">No</th>
+                <th class="px-6 py-4">Nama Beasiswa</th>
+                <th class="px-6 py-4">Tingkat</th>
+                <th class="px-6 py-4">Tanggal Tutup</th>
+                <th class="px-6 py-4">Status</th>
+                <th class="px-6 py-4">Aksi</th>
             </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200">
+            <tbody class="bg-white">
             <% scholarships.forEach((scholarship, index) => { %>
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-4 font-medium"><%= index + 1 %></td>
+                <tr class="hover:bg-blue-50 transition-colors duration-150 border-t border-gray-100 first:border-none">
+                    <td class="px-6 py-4 font-medium text-gray-900"><%= index + 1 %></td>
                     <td class="px-6 py-4"><%= scholarship.name %></td>
                     <td class="px-6 py-4"><%= scholarship.degree_requirement %></td>
                     <td class="px-6 py-4"><%= scholarship.deadline %></td>
-                    <td class="px-6 py-4 <%= scholarship.status === 'Aktif' ? 'text-green-600' : 'text-red-600' %>"><%= scholarship.status %></td>
-                    <td class="px-6 py-4 flex gap-2">
-                        <!-- Tombol Edit -->
-                        <button
-                                class="update-btn px-3 py-1 rounded bg-yellow-100 text-yellow-700 hover:bg-yellow-200 transition"
-                                title="Edit"
-                                data-id="<%= scholarship.id %>"
-                                data-scholarship="<%= JSON.stringify(scholarship).replace(/"/g, '&quot;') %>"
-                        >
-                            <i class="fas fa-edit"></i>
-                        </button>
+                    <td class="px-6 py-4">
+              <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full
+                <%= scholarship.status === 'Aktif'
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-red-100 text-red-700' %>">
+                <%= scholarship.status %>
+              </span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-2">
+                            <!-- Edit -->
+                            <button
+                                    class="update-btn flex items-center justify-center w-9 h-9 bg-yellow-100 hover:bg-yellow-200 text-yellow-700 rounded-lg shadow transition"
+                                    title="Edit"
+                                    data-id="<%= scholarship.id %>"
+                                    data-scholarship="<%= JSON.stringify(scholarship).replace(/"/g, '&quot;') %>"
+                            >
+                                <i class="fas fa-edit"></i>
+                            </button>
 
-                        <!-- Tombol Delete -->
-                        <button
-                                class="delete-btn px-3 py-1 rounded bg-red-100 text-red-700 hover:bg-red-200 transition"
-                                title="Hapus"
-                                data-id="<%= scholarship.id %>"
-                        >
-                            <i class="fas fa-trash"></i>
-                        </button>
+                            <!-- Delete -->
+                            <button
+                                    class="delete-btn flex items-center justify-center w-9 h-9 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg shadow transition"
+                                    title="Hapus"
+                                    data-id="<%= scholarship.id %>"
+                            >
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             <% }) %>
@@ -56,6 +69,9 @@
         </table>
     </div>
 </div>
+
+
+
 
 <%- include('../../layouts/components/_createScholarshipModal') %>
 <%- include('../../layouts/components/_editScholarshipModal') %>
@@ -157,7 +173,21 @@
 
         // Global close modal
         window.closeModal = function (modalId) {
-            document.getElementById(modalId).classList.add('hidden');
+            const modal = document.getElementById(modalId);
+            const modalContent = document.getElementById(`${modalId}Content`);
+
+            if (!modal || !modalContent) return;
+
+            // Hapus animasi masuk, tambahkan animasi keluar
+            modalContent.classList.remove('animate-fade-in-down');
+            modalContent.classList.add('animate-fade-out-up');
+
+            // Setelah animasi selesai, sembunyikan modal
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalContent.classList.remove('animate-fade-out-up');
+                modalContent.classList.add('animate-fade-in-down'); // reset agar bisa fade-in lagi nanti
+            }, 250); // harus sesuai dengan durasi animasi CSS
         };
 
         // === Bagian untuk Tambah Beasiswa ===

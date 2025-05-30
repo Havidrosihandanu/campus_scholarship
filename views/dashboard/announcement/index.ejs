@@ -1,78 +1,109 @@
-<div class="mt-8 bg-white rounded-xl shadow-lg overflow-hidden p-6">
-    <div class="flex items-center justify-between border-b pb-4 mb-4">
-        <h2 class="text-2xl font-semibold text-gray-800">Daftar Pengumuman</h2>
+<!-- Wrapper Card -->
+<div class="mt-10 bg-white rounded-3xl shadow-2xl p-8">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-gray-200 pb-6 mb-6">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 flex items-center gap-2">
+            Daftar Pengumuman
+        </h2>
+        <button
+                id="addAnnouncementBtn"
+                onclick="document.getElementById('createAnnouncementModal').classList.remove('hidden')"
+                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-semibold shadow-md hover:shadow-lg transition-all"
+        >
+            <i class="fas fa-plus"></i>
+            Tambah Pengumuman
+        </button>
     </div>
 
-    <div class="overflow-x-auto">
-        <table class="min-w-full table-auto text-sm text-left text-gray-700">
-            <thead class="bg-gray-100 uppercase text-xs text-gray-600">
+    <!-- Table -->
+    <div class="overflow-x-auto rounded-xl shadow-sm">
+        <table class="min-w-full text-sm text-left text-gray-800">
+            <thead class="bg-gray-100 text-gray-700 uppercase text-xs tracking-wider">
             <tr>
-                <th class="px-6 py-3">No</th>
-                <th class="px-6 py-3">Judul</th>
-                <th class="px-6 py-3">Deskripsi</th>
-                <th class="px-6 py-3">Aksi</th>
+                <th class="px-6 py-4">No</th>
+                <th class="px-6 py-4">Judul</th>
+                <th class="px-6 py-4">Deskripsi</th>
+                <th class="px-6 py-4">Aksi</th>
             </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200">
+            <tbody class="bg-white">
             <% announcements.forEach((announcement, index) => { %>
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-4 font-medium"><%= index + 1 %></td>
+                <tr class="hover:bg-blue-50 transition-colors duration-150 border-t border-gray-100 first:border-none">
+                    <td class="px-6 py-4 font-medium text-gray-900"><%= index + 1 %></td>
                     <td class="px-6 py-4"><%= announcement.title %></td>
                     <td class="px-6 py-4"><%= announcement.description %></td>
-                    <td class="px-6 py-4 flex gap-2">
-                        <button
-                                class="update-btn px-3 py-1 rounded bg-yellow-100 text-yellow-700 hover:bg-yellow-200 transition"
-                                title="Edit"
-                                data-id="<%= announcement.id %>"
-                                data-announcement="<%= JSON.stringify(announcement).replace(/"/g, '&quot;') %>"
-                        >
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button
-                                class="delete-btn px-3 py-1 rounded bg-red-100 text-red-700 hover:bg-red-200 transition"
-                                title="Hapus"
-                                data-id="<%= announcement.id %>"
-                        >
-                            <i class="fas fa-trash"></i>
-                        </button>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-2">
+                            <!-- Edit -->
+                            <button
+                                    class="edit-btn flex items-center justify-center w-9 h-9 bg-yellow-100 hover:bg-yellow-200 text-yellow-700 rounded-lg shadow transition"
+                                    title="Edit"
+                                    data-id="<%= announcement.id %>"
+                                    data-announcement="<%= JSON.stringify(announcement).replace(/"/g, '&quot;') %>"
+                            >
+                                <i class="fas fa-edit"></i>
+                            </button>
+
+                            <!-- Delete -->
+                            <button
+                                    class="delete-btn flex items-center justify-center w-9 h-9 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg shadow transition"
+                                    title="Hapus"
+                                    data-id="<%= announcement.id %>"
+                            >
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
                     </td>
                 </tr>
-            <% }); %>
+            <% }) %>
             </tbody>
         </table>
     </div>
 </div>
 
+<!-- Modal Includes -->
+<%- include('../../layouts/components/_createAnnouncementModal') %>
 <%- include('../../layouts/components/_editAnnouncementModal') %>
 <%- include('../../layouts/components/_deleteModal') %>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        function populateForm(data) {
-            document.getElementById("title").value = data.title || "";
-            document.getElementById("description").value = data.description || "";
-            document.getElementById("content").value = data.content || "";
+        function populateAnnouncementForm(data) {
+            const fields = ['title', 'description', 'content'];
+            fields.forEach(field => {
+                const el = document.getElementById(field);
+                if (el) el.value = data[field] || '';
+            });
 
-            const fileDisplay = document.getElementById("currentFile");
-            fileDisplay.innerText = data.file ? `File saat ini: ${data.file}` : "";
+            if (data.file) {
+                const filePreview = document.getElementById('currentFile');
+                if (filePreview) {
+                    filePreview.textContent = `File saat ini: ${data.file}`;
+                }
+            }
         }
 
-        document.querySelectorAll('.update-btn').forEach(btn => {
+        document.querySelectorAll('.edit-btn').forEach(btn => {
             btn.addEventListener('click', () => {
+                console.log('Edit button clicked');
                 try {
-                    const data = JSON.parse(btn.dataset.announcement.replace(/&quot;/g, '"'));
-                    document.getElementById('updateId').value = data.id;
-                    populateForm(data);
+                    const rawData = btn.dataset.announcement;
+                    console.log('Raw data:', rawData);
+                    const data = JSON.parse(rawData.replace(/&quot;/g, '"'));
+                    console.log('Parsed data:', data);
 
-                    const form = document.getElementById('updateForm');
+                    document.getElementById('editAnnouncementId').value = data.id;
+                    populateAnnouncementForm(data);
+
+                    const form = document.getElementById('editAnnouncementForm');
                     form.action = `/dashboard/announcement/${data.id}?_method=PUT`;
 
-                    document.getElementById('updateModal').classList.remove('hidden');
+                    document.getElementById('editAnnouncementModal').classList.remove('hidden');
                 } catch (e) {
-                    console.error('Gagal parsing data announcement:', e);
+                    console.error('Gagal parsing data:', e);
                 }
             });
         });
+
 
         document.querySelectorAll('.delete-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -84,8 +115,30 @@
             });
         });
 
+        document.getElementById('addAnnouncementBtn')?.addEventListener('click', () => {
+            const form = document.getElementById('createAnnouncementForm');
+            form.reset();
+
+            const filePreview = document.getElementById('currentFile');
+            if (filePreview) filePreview.textContent = '';
+
+            document.getElementById('createAnnouncementModal').classList.remove('hidden');
+        });
+
         window.closeModal = function (modalId) {
-            document.getElementById(modalId).classList.add('hidden');
+            const modal = document.getElementById(modalId);
+            const modalContent = document.getElementById(`${modalId}Content`);
+
+            if (!modal || !modalContent) return;
+
+            modalContent.classList.remove('animate-fade-in-down');
+            modalContent.classList.add('animate-fade-out-up');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalContent.classList.remove('animate-fade-out-up');
+                modalContent.classList.add('animate-fade-in-down');
+            }, 250);
         };
     });
 </script>

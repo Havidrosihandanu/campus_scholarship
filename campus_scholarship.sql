@@ -62,7 +62,7 @@ VALUES
     (
         'Admin Sigma',
         'admin@beasiswasigma.com',
-        '$2b$10$ZGYd/9g2vfJtnqqT6V4vuu1kAEtDT3d5dwGU5DxxpeJxJTMerPs0K' / / admin123
+        '$2b$10$ZGYd/9g2vfJtnqqT6V4vuu1kAEtDT3d5dwGU5DxxpeJxJTMerPs0K' -- admin123
     );
 
 INSERT INTO

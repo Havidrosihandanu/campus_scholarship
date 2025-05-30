@@ -1,15 +1,15 @@
 <aside
-  class="w-60 bg-gradient-to-b from-sky-800 to-sky-700 fixed h-full transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-20"
-  id="sidebar"
+        class="w-60 bg-gradient-to-b from-blue-700/85 via-sky-500/80 to-blue-800/85 fixed h-full transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-20"
+        id="sidebar"
 >
-  <div class="p-5 border-b bg-white/10 border-white/10 flex items-center justify-center">
-    <img src="/images/new-logo.png" class="h-10" alt="">
+  <div class="p-5 border-b bg-sky-800/70 items-center justify-center">
+    <img src="/images/new-logo.png" class="h-12" alt="Logo">
   </div>
 
   <nav class="pt-4 px-2">
     <a
-      class="flex items-center px-4 py-3 mb-2 rounded-xl <%= currentPage === 'dashboard' ? 'bg-white/20' : 'hover:bg-white/10' %> transition-colors"
-      href="/dashboard"
+            class="flex items-center  px-4 py-3 mb-2 rounded-xl <%= currentPage === 'dashboard' ? 'bg-white/20' : 'hover:bg-white/10' %> transition-colors"
+            href="/dashboard"
     >
       <i class="text-white fa-solid fa-house"></i>
       <span class="ml-3 text-white font-medium">Dashboard</span>
@@ -59,18 +59,18 @@
   </nav>
 
   <!-- Logout Section -->
-<div class="absolute bottom-0 w-full p-4 border-t border-white/10">
+  <div class="absolute bottom-0 w-full p-4 border-t border-white/10">
     <a href="/logout" onclick="return confirmLogout()" class="flex items-center px-4 py-2 rounded-lg hover:bg-white/10 transition-colors">
-        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-        </svg>
-        <span class="ml-3 text-white font-medium">Logout</span>
+      <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+      </svg>
+      <span class="ml-3 text-white font-medium">Logout</span>
     </a>
-</div>
+  </div>
 </aside>
 
 <script>
-function confirmLogout() {
+  function confirmLogout() {
     return confirm("Are you sure you want to log out?");
-}
+  }
 </script>

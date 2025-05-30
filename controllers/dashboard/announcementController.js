@@ -18,6 +18,44 @@ exports.announcement = (req, res) => {
   });
 };
 
+exports.createAnnouncement = (req, res) => {
+  const { title, description, content } = req.body;
+  const file = req.file;
+
+  if (!title || !description) {
+    return res.status(400).send("Judul dan deskripsi wajib diisi.");
+  }
+
+  let fileName = null;
+  const uploadDir = path.join(__dirname, "../../public/uploads");
+
+  // Buat folder uploads jika belum ada
+  if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+  }
+
+  if (file) {
+    fileName = Date.now() + "-" + file.originalname;
+    fs.writeFileSync(path.join(uploadDir, fileName), file.buffer);
+  }
+
+  const query = `
+    INSERT INTO announcement (title, description, content, file, created_at)
+    VALUES (?, ?, ?, ?, NOW())
+  `;
+
+  const values = [title, description, content || "", fileName];
+
+  db.query(query, values, (err, result) => {
+    if (err) {
+      console.error("Gagal menyimpan pengumuman:", err);
+      return res.status(500).send("Gagal menyimpan pengumuman.");
+    }
+
+    res.redirect("/dashboard/announcement");
+  });
+};
+
 exports.updateAnnouncement = (req, res) => {
   const id = req.params.id || req.body.id;
   const { title, description, content } = req.body;
