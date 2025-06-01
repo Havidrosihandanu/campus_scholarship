@@ -1,0 +1,60 @@
+<!-- Header Section -->
+<div class="w-full bg-blue-900 py-12 px-6">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-white text-3xl md:text-4xl font-bold tracking-wide">
+      <%= announcement.title %>
+    </h2>
+  </div>
+</div>
+
+<!-- Announcement Card -->
+<div class="max-w-5xl mx-auto mt-8 px-6">
+  <div class="bg-white rounded-xl shadow-lg p-8">
+
+    <!-- Date Badge -->
+    <div class="flex items-center text-sm text-blue-700 mb-6">
+      <div class="flex items-center space-x-2 bg-blue-100 px-3 py-1 rounded-full">
+        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        <span>
+          <%= new Date(announcement.created_at).toLocaleDateString('id-ID', {
+            day: 'numeric', month: 'long', year: 'numeric'
+          }) %>
+        </span>
+      </div>
+    </div>
+
+    <!-- Short Description -->
+    <div class="mb-6">
+      <p class="text-gray-700 text-lg font-medium leading-relaxed">
+        <%= announcement.description %>
+      </p>
+    </div>
+
+    <!-- Main Content -->
+    <% if (announcement.content) { %>
+      <div class="mb-6 prose prose-blue max-w-none">
+        <%= announcement.content %>
+      </div>
+    <% } %>
+
+    <!-- File Download -->
+    <div class="pt-4 mt-6 border-t">
+      <p class="font-semibold text-gray-700 mb-2">Unduh File:</p>
+      <% if (announcement.file) { %>
+        <a href="/uploads/<%= announcement.file %>" download
+           class="inline-flex items-center text-blue-600 hover:underline hover:text-blue-800 transition">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 4v12" />
+          </svg>
+          <%= announcement.file %>
+        </a>
+      <% } else { %>
+        <span class="text-gray-500">Tidak tersedia</span>
+      <% } %>
+    </div>
+  </div>
+</div>

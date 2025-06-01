@@ -1,343 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %> | Beasiswa</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-    />
-    <style>
-      .sidebar-item:hover {
-        transform: translateX(4px);
-        transition: transform 0.2s ease-in-out;
-      }
-      .mobile-menu {
-        max-height: 0;
-        transition: max-height 0.3s ease-out;
-        overflow: hidden;
-      }
-      .mobile-menu.active {
-        max-height: 500px;
-        transition: max-height 0.3s ease-in;
-      }
-    </style>
-  </head>
-  <body class="bg-gray-50 min-h-screen flex flex-col">
-    <!-- Main Content -->
-    <main
-      class="flex-1 container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-6"
-    >
-      <div class="bg-white rounded-xl shadow-md p-4 md:col-span-2">
-        <h1 class="text-4xl mb-4 text-blue-900 font-bold">Daftar Beasiswa</h1>
-        <!-- Table for larger screens -->
-        <table
-          class="min-w-full table-auto text-sm text-left text-gray-700 hidden lg:table"
-        >
-          <thead class="bg-gray-100 uppercase text-xs text-gray-600">
-            <tr>
-              <th class="px-4 py-2">No</th>
-              <th class="px-4 py-2">Nama Beasiswa</th>
-              <th class="px-4 py-2">Tingkat</th>
-              <th class="px-4 py-2">Tanggal Tutup</th>
-              <th class="px-4 py-2">Status</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-200">
-            <% scholarships.forEach((scholarship, index) => { %>
-            <tr
-              class="hover:bg-gray-50 cursor-pointer transition"
-              onclick="window.location.href = '/portal/scholarship/<%= scholarship.id %>'"
-            >
-              <td class="px-4 py-3"><%= index + 1 %></td>
-              <td class="px-4 py-3"><%= scholarship.name %></td>
-              <td class="px-4 py-3"><%= scholarship.degree_requirement %></td>
-              <td class="px-4 py-3"><%= scholarship.deadline %></td>
-              <td class="px-4 py-3">
-                <span
-                  class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium <%= scholarship.status === 'Aktif' ? 'text-green-800 bg-green-200' : 'text-red-800 bg-red-200' %>"
-                >
-                  <%= scholarship.status %>
-                </span>
-              </td>
-            </tr>
-            <% }) %>
-          </tbody>
-        </table>
-      </div>
+<!-- Hero Section -->
+<section class="bg-gradient-to-br from-blue-600 to-sky-400 text-white text-center py-20 px-4 rounded-xl shadow">
+    <h1 class="text-5xl md:text-6xl font-extrabold mb-4 floating">Sigma Scholarship</h1>
+    <p class="text-lg md:text-xl mb-6 max-w-2xl mx-auto">
+        Portal beasiswa digital yang membantu mahasiswa Indonesia mendapatkan akses ke pendidikan lebih tinggi.
+    </p>
+    <a href="/portal/scholarship" class="bg-white text-blue-600 font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-gray-100 transition">
+        Lihat Daftar Beasiswa
+    </a>
+</section>
 
-      <!-- Mobile layout for smaller screens -->
-      <div class="bg-white rounded-xl shadow-md p-4 md:col-span-1 lg:hidden">
-        <% scholarships.forEach((scholarship, index) => { %>
-        <div class="bg-white rounded-xl shadow-md p-4 mb-4">
-          <h2 class="text-xl font-semibold text-blue-900 mb-2">
-            <%= scholarship.name %>
-          </h2>
-          <p class="text-gray-600">
-            <%= scholarship.description || 'Tidak ada deskripsi' %>
-          </p>
-          <div class="flex justify-between text-sm text-gray-500">
-            <span class="text-blue-900"
-              >Tingkat:
-              <span class="font-bold"
-                ><%= scholarship.degree_requirement %></span
-              ></span
-            >
-            <span class="text-blue-900"
-              >Status:
-              <span
-                class="font-bold <%= scholarship.status === 'Aktif' ? 'text-green-500' : 'text-red-500' %>"
-              >
-                <%= scholarship.status %></span
-              ></span
-            >
-          </div>
-          <div class="text-sm text-blue-900">
-            Tutup:
-            <span class="font-bold"
-              ><%= new Date(scholarship.deadline).toLocaleDateString() %></span
-            >
-          </div>
+<!-- Daftar Beasiswa -->
+<section id="beasiswa" class="mt-16 bg-white rounded-xl shadow px-6 py-10">
+    <h2 class="text-3xl font-bold text-center mb-10">Daftar Beasiswa</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-blue-100 p-6 rounded-xl shadow hover:shadow-lg transition">
+            <h3 class="text-xl font-semibold mb-2">Beasiswa D3</h3>
+            <p class="text-sm text-gray-700">Diperuntukkan untuk mahasiswa Diploma 3 dari seluruh Indonesia.</p>
         </div>
-        <% }) %>
-      </div>
-
-      <aside class="w-full space-y-4 md:col-span-1">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-          <div class="px-4 py-3 border-b">
-            <h2 class="text-lg font-semibold text-blue-900">
-              Pengumuman Terbaru
-            </h2>
-          </div>
-          <div class="p-4 space-y-3">
-            <% announcements.forEach((announcement) => { %>
-            <a
-              href="/portal/announcement/<%= announcement.id %>"
-              class="block group transition duration-150 ease-in-out"
-            >
-              <div
-                class="bg-white p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-sm transition duration-150 ease-in-out group-hover:bg-blue-50"
-              >
-                <div class="flex items-start">
-                  <div class="flex-shrink-0 bg-blue-100 p-2 rounded-full mr-3">
-                    <svg
-                      class="h-5 w-5 text-blue-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                      />
-                    </svg>
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <h3 class="text-sm font-medium text-gray-800 truncate">
-                      <%= announcement.title %>
-                    </h3>
-                    <p class="text-xs text-gray-500 mt-1 truncate">
-                      <%= announcement.description || 'Tidak ada deskripsi' %>
-                    </p>
-                    <div class="mt-2 flex items-center text-xs text-blue-900">
-                      <svg
-                        class="flex-shrink-0 mr-1.5 h-4 w-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        />
-                      </svg>
-                      <span class="font-bold"
-                        ><%= new
-                        Date(announcement.created_at).toLocaleDateString()
-                        %></span
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-            <% }) %>
-          </div>
+        <div class="bg-blue-100 p-6 rounded-xl shadow hover:shadow-lg transition">
+            <h3 class="text-xl font-semibold mb-2">Beasiswa S1</h3>
+            <p class="text-sm text-gray-700">Kesempatan meraih pendidikan sarjana tanpa hambatan biaya.</p>
         </div>
-      </aside>
-    </main>
-
-    <!-- Success Modal -->
-    <div
-      id="successModal"
-      class="fixed z-10 inset-0 overflow-y-auto hidden"
-      aria-labelledby="modal-title"
-      role="dialog"
-      aria-modal="true"
-    >
-      <div
-        class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
-      >
-        <div
-          class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
-          aria-hidden="true"
-        ></div>
-        <span
-          class="hidden sm:inline-block sm:align-middle sm:h-screen"
-          aria-hidden="true"
-          >&#8203;</span
-        >
-        <div
-          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-        >
-          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div class="sm:flex sm:items-start">
-              <div
-                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10"
-              >
-                <svg
-                  class="h-6 w-6 text-green-600"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-              </div>
-              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                <h3
-                  class="text-lg leading-6 font-medium text-gray-900"
-                  id="modal-title-success"
-                >
-                  Pendaftaran Berhasil!
-                </h3>
-                <div class="mt-2">
-                  <p class="text-sm text-gray-500">
-                    Data pendaftaran beasiswa Anda telah berhasil terkirim.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-            <button
-              onclick="closeSuccessModal()"
-              type="button"
-              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
-            >
-              OK
-            </button>
-          </div>
+        <div class="bg-blue-100 p-6 rounded-xl shadow hover:shadow-lg transition">
+            <h3 class="text-xl font-semibold mb-2">Beasiswa S2/S3</h3>
+            <p class="text-sm text-gray-700">Dukung jenjang studi lanjut Anda ke magister dan doktoral.</p>
         </div>
-      </div>
     </div>
+</section>
 
-    <!-- Error Modal -->
-    <div
-      id="errorModal"
-      class="fixed z-10 inset-0 overflow-y-auto hidden"
-      aria-labelledby="modal-title"
-      role="dialog"
-      aria-modal="true"
-    >
-      <div
-        class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
-      >
-        <div
-          class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
-          aria-hidden="true"
-        ></div>
-        <span
-          class="hidden sm:inline-block sm:align-middle sm:h-screen"
-          aria-hidden="true"
-          >&#8203;</span
-        >
-        <div
-          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-        >
-          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div class="sm:flex sm:items-start">
-              <div
-                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
-              >
-                <svg
-                  class="h-6 w-6 text-red-600"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                <h3
-                  class="text-lg leading-6 font-medium text-gray-900"
-                  id="modal-title-error"
-                >
-                  Gagal Mendaftar!
-                </h3>
-                <div class="mt-2">
-                  <p class="text-sm text-gray-500">
-                    Terjadi kesalahan saat menyimpan data pendaftaran. Silakan
-                    coba lagi nanti.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-            <button
-              onclick="closeErrorModal()"
-              type="button"
-              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-            >
-              OK
-            </button>
-          </div>
-        </div>
-      </div>
+<!-- Tentang Kami -->
+<section id="tentang" class="mt-16 bg-sky-50 rounded-xl px-6 py-10 shadow">
+    <div class="text-center max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Tentang Sigma Scholarship</h2>
+        <p class="text-gray-700 leading-relaxed text-lg">
+            Sigma Scholarship adalah platform beasiswa digital yang didedikasikan untuk mendukung mahasiswa Indonesia dalam mengakses pendidikan tinggi tanpa batasan ekonomi. Kami percaya bahwa pendidikan berkualitas adalah hak semua orang.
+        </p>
     </div>
+</section>
 
-    <script>
-      function closeSuccessModal() {
-        document.getElementById("successModal").classList.add("hidden");
-      }
+<!-- Alumni -->
+<section class="mt-16 bg-lime-700 rounded-xl px-6 py-10 shadow text-white">
+    <h2 class="text-3xl font-bold text-center mb-8 uppercase tracking-wide">Alumni</h2>
+    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-8 gap-2">
+        <% for(let i = 1; i <= 16; i++) { %>
+            <div class="cursor-pointer" onclick="openModal(<%= i %>)">
+                <img src="/uploads/alumni/alumni<%= i %>.jpg" class="rounded-lg shadow hover:scale-105 transition duration-300" alt="Alumni <%= i %>">
+            </div>
+        <% } %>
+    </div>
+</section>
 
-      function closeErrorModal() {
-        document.getElementById("errorModal").classList.add("hidden");
-      }
+<!-- Modal Alumni -->
+<div id="alumniModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
+    <div id="alumniModalContent" class="w-full h-full flex items-center justify-center p-4 animate-fade-in-down">
+        <div class="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto p-6 rounded-2xl shadow-2xl relative">
+            <button type="button" onclick="closeModal('alumniModal')" class="absolute top-3 right-4 text-2xl text-gray-400 hover:text-red-500 transition leading-none" title="Tutup">
+                &times;
+            </button>
+            <img id="modalImage" src="" alt="Foto Alumni" class="w-full rounded-xl mb-4 shadow">
+            <p id="modalText" class="text-gray-700 text-base leading-relaxed"></p>
+        </div>
+    </div>
+</div>
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const success = urlParams.get("success");
-        const error = urlParams.get("error");
+<!-- Testimoni -->
+<section class="mt-16 bg-white px-6 py-12 rounded-xl shadow">
+    <h2 class="text-3xl font-bold text-center mb-10">Apa Kata Penerima Beasiswa</h2>
+    <div class="grid md:grid-cols-3 gap-6 text-gray-700">
+        <div class="bg-gray-100 p-6 rounded-xl shadow">
+            <p class="mb-4 italic">"Berkat Sigma Scholarship, saya bisa menyelesaikan kuliah tanpa khawatir soal biaya. Terima kasih banyak!"</p>
+            <p class="font-semibold">– Rina, Mahasiswa S1 Universitas Indonesia</p>
+        </div>
+        <div class="bg-gray-100 p-6 rounded-xl shadow">
+            <p class="mb-4 italic">"Platform ini sangat mudah digunakan, dan proses seleksinya transparan. Sangat membantu!"</p>
+            <p class="font-semibold">– Andi, Penerima Beasiswa D3 dari Makassar</p>
+        </div>
+        <div class="bg-gray-100 p-6 rounded-xl shadow">
+            <p class="mb-4 italic">"Saya bisa lanjut studi ke S2 berkat bantuan dari Sigma Scholarship. Ini sangat berarti bagi keluarga saya."</p>
+            <p class="font-semibold">– Lestari, Mahasiswa Pascasarjana ITB</p>
+        </div>
+    </div>
+</section>
 
-        if (success === "true") {
-          document.getElementById("successModal").classList.remove("hidden");
-        } else if (error) {
-          document.getElementById("errorModal").classList.remove("hidden");
-        }
-      });
-    </script>
-  </body>
-</html>
+<!-- Cara Daftar -->
+<section class="mt-16 bg-sky-100 px-6 py-12 rounded-xl shadow">
+    <h2 class="text-3xl font-bold text-center mb-6">Cara Mendaftar Beasiswa</h2>
+    <ol class="max-w-3xl mx-auto list-decimal list-inside text-lg text-gray-700 space-y-3">
+        <li>Buka halaman <a href="/portal/scholarship" class="text-blue-700 underline">Daftar Beasiswa</a>.</li>
+        <li>Pilih beasiswa yang sesuai dengan jenjang studi Anda.</li>
+        <li>Klik tombol “Daftar” dan isi formulir pendaftaran secara lengkap.</li>
+        <li>Unggah dokumen yang diminta seperti surat rekomendasi dan file pendukung.</li>
+        <li>Tunggu pengumuman hasil seleksi melalui halaman pengumuman.</li>
+    </ol>
+</section>
+
+<!-- Ajakan -->
+<section class="mt-16 bg-gradient-to-r from-blue-500 to-sky-400 text-white text-center px-6 py-16 rounded-xl shadow">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Siap Mewujudkan Masa Depanmu?</h2>
+    <p class="text-lg md:text-xl mb-6">Daftarkan dirimu sekarang dan raih beasiswa impianmu bersama Sigma Scholarship.</p>
+    <a href="/portal/scholarship" class="bg-white text-blue-600 font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-gray-100 transition">
+        Mulai Daftar Beasiswa
+    </a>
+</section>
+
+<!-- Script Modal -->
+<script>
+    const testimonials = {
+        1: "Rina adalah alumni dari Universitas Indonesia yang menerima Beasiswa S1 pada tahun 2022.",
+        2: "Andi berasal dari Makassar dan menerima Beasiswa D3. Kini ia bekerja di perusahaan teknologi nasional.",
+        3: "Lestari adalah mahasiswa pascasarjana ITB yang berhasil menyelesaikan studi S2 berkat Sigma Scholarship.",
+        4: "Budi, alumni Beasiswa S1 dari Medan, kini melanjutkan S2 di luar negeri.",
+        5: "Sari, lulusan Beasiswa D3, kini berkarier di bidang kesehatan masyarakat.",
+        6: "Ardi memanfaatkan Beasiswa S1 untuk menjadi pengusaha muda sukses.",
+        7: "Desi menerima Beasiswa Pascasarjana dan kini mengajar di universitas negeri.",
+        8: "Raka menggunakan beasiswa untuk meneliti perubahan iklim di Papua.",
+        9: "Nina aktif dalam komunitas pendidikan setelah lulus dengan dukungan Sigma.",
+        10: "Bayu menerima Beasiswa D3 dan menjadi teknisi profesional di industri.",
+        11: "Vina menyelesaikan pendidikan magisternya dengan prestasi cumlaude.",
+        12: "Eko kini bekerja di kementerian setelah lulus dengan dukungan Sigma Scholarship."
+    };
+
+    function openModal(id) {
+        const modal = document.getElementById("alumniModal");
+        const content = document.getElementById("alumniModalContent");
+
+        document.getElementById("modalImage").src = `/uploads/alumni/alumni${id}.jpg`;
+        document.getElementById("modalText").innerText = testimonials[id] || "Testimoni alumni tidak tersedia.";
+
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+
+        content.classList.remove("animate-fade-out-up");
+        content.classList.add("animate-fade-in-down");
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        const content = modal.querySelector("div.animate-fade-in-down");
+
+        content.classList.remove("animate-fade-in-down");
+        content.classList.add("animate-fade-out-up");
+
+        setTimeout(() => {
+            modal.classList.remove("flex");
+            modal.classList.add("hidden");
+        }, 250);
+    }
+</script>
