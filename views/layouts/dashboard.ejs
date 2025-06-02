@@ -17,28 +17,30 @@
     <link rel="stylesheet" href="/css/all.min.css" />
     <link rel="stylesheet" href="/css/style.css" />
   </head>
-  <body class="bg-gradient-to-b bg-sky-600/40 min-h-screen">
-    <div class="flex min-h-screen">
-      <div
-        id="mobileBackdrop"
-        class="fixed inset-0 bg-black/50 z-10 md:hidden hidden"
-      ></div>
+  <body class="bg-gradient-to-b from-sky-500/85 via-sky-600/80  to-sky-900/85 min-h-screen">
+  <div class="flex min-h-screen">
+    <!-- Mobile Backdrop (only visible on mobile devices) -->
+    <div
+            id="mobileBackdrop"
+            class="fixed inset-0 bg-black/50 z-10 md:hidden hidden"
+    ></div>
 
-      <!-- Sidebar -->
-      <%- include('./components/_sidebar.ejs') %>
+    <!-- Sidebar -->
+    <%- include('./components/dashboard/_sidebar.ejs') %>
 
-      <!-- Main Content -->
-      <main class="flex-1 md:ml-60 bg-white/50 min-h-screen">
-        <!-- Top Bar -->
-        <%- include('./components/_header.ejs') %>
+    <!-- Main Content -->
+    <main class="flex-1 md:ml-60 bg-gradient-to-b from-white/90 to-white/5 min-h-screen">
+      <!-- Top Bar -->
+      <%- include('./components/dashboard/_header.ejs') %>
 
-        <!-- Page Content -->
-        <div class="container mx-auto px-4 py-6">
-          <%- body %>
-          <!-- Render the content variable directly here -->
-        </div>
-      </main>
-    </div>
+      <!-- Page Content -->
+      <div class="container mx-auto px-4 py-6">
+        <%- body %>
+        <!-- Render the content variable directly here -->
+      </div>
+    </main>
+  </div>
+  </body>
 
     <script>
       // Toggle Sidebar Mobile

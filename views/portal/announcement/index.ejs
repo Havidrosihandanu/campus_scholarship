@@ -1,0 +1,68 @@
+<aside class="w-full space-y-4 md:col-span-1">
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="px-4 py-3 border-b">
+            <h2 class="text-lg font-semibold text-blue-900">
+                Pengumuman Terbaru
+            </h2>
+        </div>
+        <div class="p-4 space-y-3">
+            <% announcements.forEach((announcement) => { %>
+                <a
+                        href="/portal/announcement/<%= announcement.id %>"
+                        class="block group transition duration-150 ease-in-out"
+                >
+                    <div
+                            class="bg-white p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-sm transition duration-150 ease-in-out group-hover:bg-blue-50"
+                    >
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-blue-100 p-2 rounded-full mr-3">
+                                <svg
+                                        class="h-5 w-5 text-blue-600"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        aria-hidden="true"
+                                >
+                                    <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                                    />
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-sm font-medium text-gray-800 truncate">
+                                    <%= announcement.title %>
+                                </h3>
+                                <p class="text-xs text-gray-500 mt-1 truncate">
+                                    <%= announcement.description || 'Tidak ada deskripsi' %>
+                                </p>
+                                <div class="mt-2 flex items-center text-xs text-blue-900">
+                                    <svg
+                                            class="flex-shrink-0 mr-1.5 h-4 w-4"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                    >
+                                        <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                        />
+                                    </svg>
+                                    <span class="font-bold"
+                                    ><%= new
+                                        Date(announcement.created_at).toLocaleDateString()
+                                        %></span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            <% }) %>
+        </div>
+    </div>
+</aside>

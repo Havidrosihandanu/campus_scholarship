@@ -1,0 +1,101 @@
+<!-- views/layouts/components/_editRegistrantModal.ejs -->
+<div id="editRegistrantModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden">
+    <div id="editRegistrantModalContent" class="w-full h-full flex items-center justify-center p-4 animate-fade-in-down">
+        <div class="bg-white w-full max-w-3xl h-full max-h-[95vh] overflow-y-auto p-6 rounded-2xl shadow-2xl relative">
+
+            <!-- Tombol close atas kanan -->
+            <button type="button" onclick="closeModal('editRegistrantModal')" class="absolute top-3 right-4 text-3xl text-gray-400 hover:text-red-500 transition">&times;</button>
+
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800">Edit Pendaftar</h2>
+            </div>
+
+            <!-- Form -->
+            <form id="editRegistrantForm" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <input type="hidden" name="_method" value="PUT" />
+                <input type="hidden" id="editRegistrantId" name="id" />
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="full_name" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                        <input type="text" name="full_name" id="full_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                    </div>
+
+                    <div>
+                        <label for="domicile" class="block text-sm font-medium text-gray-700 mb-1">Domisili</label>
+                        <input type="text" name="domicile" id="domicile" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="birth_date" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Lahir</label>
+                        <input type="date" name="birth_date" id="birth_date" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" name="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                    </div>
+
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Nomor Telepon</label>
+                        <input type="text" name="phone" id="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="campus_origin" class="block text-sm font-medium text-gray-700 mb-1">Asal Kampus</label>
+                        <input type="text" name="campus_origin" id="campus_origin" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="major" class="block text-sm font-medium text-gray-700 mb-1">Jurusan</label>
+                        <input type="text" name="major" id="major" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="degree" class="block text-sm font-medium text-gray-700 mb-1">Jenjang</label>
+                        <input type="text" name="degree" id="degree" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="semester" class="block text-sm font-medium text-gray-700 mb-1">Semester</label>
+                        <input type="number" name="semester" id="semester" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                        <input type="text" name="status" id="status" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="interest" class="block text-sm font-medium text-gray-700 mb-1">Minat</label>
+                        <textarea name="interest" id="interest" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="scholarship_id" class="block text-sm font-medium text-gray-700 mb-1">ID Beasiswa</label>
+                        <input type="number" name="scholarship_id" id="scholarship_id" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div>
+                        <label for="letter_of_recomendation" class="block text-sm font-medium text-gray-700 mb-1">Surat Rekomendasi</label>
+                        <input type="file" name="letter_of_recomendation" id="letter_of_recomendation" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" />
+                        <p id="currentLetterFile" class="text-sm text-gray-500 mt-1"></p>
+                    </div>
+
+                    <div>
+                        <label for="supporting_file" class="block text-sm font-medium text-gray-700 mb-1">File Pendukung</label>
+                        <input type="file" name="supporting_file" id="supporting_file" class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" />
+                        <p id="currentSupportFile" class="text-sm text-gray-500 mt-1"></p>
+                    </div>
+                </div>
+
+                <!-- Tombol aksi -->
+                <div class="flex justify-end gap-3 pt-6 border-t mt-6">
+                    <button type="button" onclick="closeModal('editRegistrantModal')" class="px-5 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Batal</button>
+                    <button type="submit" class="px-5 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-sky-500 text-white hover:brightness-110 transition">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -37,6 +37,7 @@ router.delete("/scholarship/:id", scholarshipController.deleteScholarship);
 
 // Router Announcement
 router.get("/announcement", announcementController.announcement);
+router.post("/announcement", upload.single("file"), announcementController.createAnnouncement);
 router.put("/announcement/:id", upload.single("file"), announcementController.updateAnnouncement);
 router.delete("/announcement/:id", announcementController.deleteAnnouncement);
 

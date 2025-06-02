@@ -1,0 +1,52 @@
+<!-- Header -->
+<header class="bg-gradient-to-r from-blue-700 to-blue-900 text-white sticky top-0 z-50 shadow-lg">
+    <div class="max-w-screen-xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <!-- Hamburger -->
+            <button id="hamburgerBtn" class="md:hidden p-2 rounded hover:bg-blue-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <a href="/portal">
+                <img src="/images/new-logo.png" class="h-10" alt="Logo" />
+            </a>
+        </div>
+
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex space-x-6">
+            <a href="/portal" class="hover:text-blue-200 transition">Beranda</a>
+            <a href="/portal/scholarship" class="hover:text-blue-200 transition">Beasiswa</a>
+            <a href="/portal/announcement" class="hover:text-blue-200 transition">Pengumuman</a>
+            <a href="/portal/about-us" class="hover:text-blue-200 transition">Tentang Kami</a>
+        </nav>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobileMenu" class="mobile-menu md:hidden bg-blue-800">
+        <div class="max-w-screen-xl mx-auto px-4 py-2">
+            <a href="/portal" class="block py-3 px-2 hover:bg-blue-700 rounded">Beranda</a>
+            <a href="/portal/scholarship" class="block py-3 px-2 hover:bg-blue-700 rounded">Beasiswa</a>
+            <a href="/portal/announcement" class="block py-3 px-2 hover:bg-blue-700 rounded">Pengumuman</a>
+            <a href="/portal/about-us" class="block py-3 px-2 hover:bg-blue-700 rounded">Tentang Kami</a>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Menu Script -->
+<script>
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    hamburgerBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("active");
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!hamburgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+            mobileMenu.classList.remove("active");
+        }
+    });
+</script>

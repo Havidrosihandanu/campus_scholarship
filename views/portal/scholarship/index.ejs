@@ -1,0 +1,323 @@
+<!-- Main Content -->
+<main
+        class="flex-1 container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-6"
+>
+    <div class="bg-white rounded-xl shadow-md p-4 md:col-span-2">
+        <h1 class="text-4xl mb-4 text-blue-900 font-bold">Daftar Beasiswa</h1>
+        <!-- Table for larger screens -->
+        <table
+                class="min-w-full table-auto text-sm text-left text-gray-700 hidden lg:table"
+        >
+            <thead class="bg-gray-100 uppercase text-xs text-gray-600">
+            <tr>
+                <th class="px-4 py-2">No</th>
+                <th class="px-4 py-2">Nama Beasiswa</th>
+                <th class="px-4 py-2">Tingkat</th>
+                <th class="px-4 py-2">Tanggal Tutup</th>
+                <th class="px-4 py-2">Status</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+            <% scholarships.forEach((scholarship, index) => { %>
+                <tr
+                        class="hover:bg-gray-50 cursor-pointer transition"
+                        onclick="window.location.href = '/portal/scholarship/<%= scholarship.id %>'"
+                >
+                    <td class="px-4 py-3"><%= startNumber + index %></td>
+                    <td class="px-4 py-3"><%= scholarship.name %></td>
+                    <td class="px-4 py-3"><%= scholarship.degree_requirement %></td>
+                    <td class="px-4 py-3"><%= scholarship.deadline %></td>
+                    <td class="px-4 py-3">
+                <span
+                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium <%= scholarship.status === 'Aktif' ? 'text-green-800 bg-green-200' : 'text-red-800 bg-red-200' %>"
+                >
+                  <%= scholarship.status %>
+                </span>
+                    </td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+        <!-- Pagination -->
+        <div class="mt-6 flex justify-center lg:justify-start">
+            <nav class="inline-flex -space-x-px text-sm rounded-md shadow-sm" aria-label="Pagination">
+                <% if (currentPageNumber > 1) { %>
+                    <a href="?page=<%= currentPageNumber - 1 %>&search=<%= search || '' %>&degree=<%= degree || '' %>"
+                       class="px-3 py-1 rounded-l-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-100">
+                        &laquo; Prev
+                    </a>
+                <% } else { %>
+                    <span class="px-3 py-1 rounded-l-md border border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed">
+      &laquo; Prev
+    </span>
+                <% } %>
+
+                <% for (let i = 1; i <= totalPages; i++) { %>
+                    <a href="?page=<%= i %>&search=<%= search || '' %>&degree=<%= degree || '' %>"
+                       class="px-3 py-1 border border-gray-300 <%= currentPageNumber === i ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100' %>">
+                        <%= i %>
+                    </a>
+                <% } %>
+
+                <% if (currentPageNumber < totalPages) { %>
+                    <a href="?page=<%= currentPageNumber + 1 %>&search=<%= search || '' %>&degree=<%= degree || '' %>"
+                       class="px-3 py-1 rounded-r-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-100">
+                        Next &raquo;
+                    </a>
+                <% } else { %>
+                    <span class="px-3 py-1 rounded-r-md border border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed">
+      Next &raquo;
+    </span>
+                <% } %>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Sidebar Filter & Search -->
+    <div class="bg-white rounded-xl shadow-md p-4 space-y-4 h-fit hidden lg:block">
+        <h2 class="text-2xl font-bold text-blue-900 mb-2">Cari Beasiswa</h2>
+        <form method="GET" action="/portal/scholarship" class="space-y-4">
+            <!-- Search Field -->
+            <div>
+                <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Nama Beasiswa</label>
+                <input
+                        type="text"
+                        id="search"
+                        name="search"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Cari berdasarkan nama..."
+                        value="<%= typeof search !== 'undefined' ? search : '' %>"
+                />
+            </div>
+
+            <!-- Degree Filter -->
+            <div>
+                <label for="degree" class="block text-sm font-medium text-gray-700 mb-1">Tingkat Pendidikan</label>
+                <select
+                        id="degree"
+                        name="degree"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                >
+                    <option value="">Semua</option>
+                    <option value="D3" <%= degree === 'D3' ? 'selected' : '' %>>D3</option>
+                    <option value="S1" <%= degree === 'S1' ? 'selected' : '' %>>S1</option>
+                    <option value="S2" <%= degree === 'S2' ? 'selected' : '' %>>S2</option>
+                    <option value="S3" <%= degree === 'S3' ? 'selected' : '' %>>S3</option>
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button
+                        type="submit"
+                        class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+                >
+                    Terapkan Filter
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Mobile layout for smaller screens -->
+    <div class="bg-white rounded-xl shadow-md p-4 md:col-span-1 lg:hidden">
+        <% scholarships.forEach((scholarship, index) => { %>
+            <div class="bg-white rounded-xl shadow-md p-4 mb-4">
+                <h2 class="text-xl font-semibold text-blue-900 mb-2">
+                    <%= scholarship.name %>
+                </h2>
+                <p class="text-gray-600">
+                    <%= scholarship.description || 'Tidak ada deskripsi' %>
+                </p>
+                <div class="flex justify-between text-sm text-gray-500">
+            <span class="text-blue-900"
+            >Tingkat:
+              <span class="font-bold"
+              ><%= scholarship.degree_requirement %></span
+              ></span
+            >
+                    <span class="text-blue-900"
+                    >Status:
+              <span
+                      class="font-bold <%= scholarship.status === 'Aktif' ? 'text-green-500' : 'text-red-500' %>"
+              >
+                <%= scholarship.status %></span
+              ></span
+                    >
+                </div>
+                <div class="text-sm text-blue-900">
+                    Tutup:
+                    <span class="font-bold"
+                    ><%= new Date(scholarship.deadline).toLocaleDateString() %></span
+                    >
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</main>
+
+<!-- Success Modal -->
+<div
+        id="successModal"
+        class="fixed z-10 inset-0 overflow-y-auto hidden"
+        aria-labelledby="modal-title"
+        role="dialog"
+        aria-modal="true"
+>
+    <div
+            class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+    >
+        <div
+                class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                aria-hidden="true"
+        ></div>
+        <span
+                class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                aria-hidden="true"
+        >&#8203;</span
+        >
+        <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        >
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div
+                            class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10"
+                    >
+                        <svg
+                                class="h-6 w-6 text-green-600"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                        >
+                            <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M5 13l4 4L19 7"
+                            />
+                        </svg>
+                    </div>
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <h3
+                                class="text-lg leading-6 font-medium text-gray-900"
+                                id="modal-title-success"
+                        >
+                            Pendaftaran Berhasil!
+                        </h3>
+                        <div class="mt-2">
+                            <p class="text-sm text-gray-500">
+                                Data pendaftaran beasiswa Anda telah berhasil terkirim.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button
+                        onclick="closeSuccessModal()"
+                        type="button"
+                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                >
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div
+        id="errorModal"
+        class="fixed z-10 inset-0 overflow-y-auto hidden"
+        aria-labelledby="modal-title"
+        role="dialog"
+        aria-modal="true"
+>
+    <div
+            class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+    >
+        <div
+                class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                aria-hidden="true"
+        ></div>
+        <span
+                class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                aria-hidden="true"
+        >&#8203;</span
+        >
+        <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        >
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div
+                            class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+                    >
+                        <svg
+                                class="h-6 w-6 text-red-600"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                        >
+                            <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                        </svg>
+                    </div>
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <h3
+                                class="text-lg leading-6 font-medium text-gray-900"
+                                id="modal-title-error"
+                        >
+                            Gagal Mendaftar!
+                        </h3>
+                        <div class="mt-2">
+                            <p class="text-sm text-gray-500">
+                                Terjadi kesalahan saat menyimpan data pendaftaran. Silakan
+                                coba lagi nanti.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button
+                        onclick="closeErrorModal()"
+                        type="button"
+                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                >
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function closeSuccessModal() {
+        document.getElementById("successModal").classList.add("hidden");
+    }
+
+    function closeErrorModal() {
+        document.getElementById("errorModal").classList.add("hidden");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const success = urlParams.get("success");
+        const error = urlParams.get("error");
+
+        if (success === "true") {
+            document.getElementById("successModal").classList.remove("hidden");
+        } else if (error) {
+            document.getElementById("errorModal").classList.remove("hidden");
+        }
+    });
+</script>

@@ -1,126 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %> | Beasiswa</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-    />
-    <style>
-      .sidebar-item:hover {
-        transform: translateX(4px);
-        transition: transform 0.2s ease-in-out;
-      }
-      /* Smooth transition for mobile menu */
-      .mobile-menu {
-        max-height: 0;
-        transition: max-height 0.3s ease-out;
-        overflow: hidden;
-      }
-      .mobile-menu.active {
-        max-height: 500px;
-        transition: max-height 0.3s ease-in;
-      }
-    </style>
-  </head>
-  <body class="bg-gray-50 min-h-screen flex flex-col">
-    <!-- Header -->
-    <header class="bg-blue-900 text-white sticky top-0 z-50 shadow-lg">
-      <div
-        class="container mx-auto px-4 py-4 flex items-center justify-between"
-      >
-        <div class="flex items-center space-x-3">
-          <!-- Hamburger Icon for Mobile -->
-          <button
-            id="hamburgerBtn"
-            class="md:hidden p-2 rounded hover:bg-blue-600 focus:outline-none"
-          >
-            <svg
-              class="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-        <img src="/images/new-logo.png" class="h-10" alt="Logo">
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> | Beasiswa</title>
 
-        <!-- Desktop Navigation -->
-        <nav class="hidden md:flex space-x-6">
-          <a href="/portal" class="hover:text-blue-200 transition-colors"
-            >Beranda</a
-          >
-          <a
-            href="/portal/about-us"
-            class="hover:text-blue-200 transition-colors"
-            >Tentang Kami</a
-          >
-        </nav>
-      </div>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-      <!-- Mobile Navigation -->
-      <div id="mobileMenu" class="mobile-menu md:hidden bg-blue-800">
-        <div class="container mx-auto px-4 py-2">
-          <a
-            href="/portal"
-            class="block py-3 px-2 hover:bg-blue-700 rounded transition-colors"
-            >Beranda</a
-          >
-          <a
-            href="/portal/about-us"
-            class="block py-3 px-2 hover:bg-blue-700 rounded transition-colors"
-            >Tentang Kami</a
-          >
-        </div>
-      </div>
-    </header>
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
 
-    <!-- Main Content -->
-    <main
-      class="flex-1 container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-6"
-    >
-      <div class="grid grid-cols-1 gap-6">
-        <!-- Main Content Area -->
-        <%- body %>
-      </div>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .sidebar-item:hover {
+      transform: translateX(4px);
+      transition: transform 0.2s ease-in-out;
+    }
+    .mobile-menu {
+      max-height: 0;
+      transition: max-height 0.3s ease-out;
+      overflow: hidden;
+    }
+    .mobile-menu.active {
+      max-height: 500px;
+      transition: max-height 0.3s ease-in;
+    }
+  </style>
+</head>
 
-      <!-- Sidebar -->
-    </main>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+<!--Header-->
+<%- include('./components/portal/_header.ejs') %>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 mt-12">
-      <div class="container mx-auto px-4 py-3 text-center text-sm">
-        <p class="col-span-1">
-          &copy; 2025 Beasiswa Sigma. All rights reserved.
-        </p>
-      </div>
-    </footer>
+<!-- Main Content -->
+<main class="flex-1 px-4 py-10">
+  <div class="max-w-screen-xl mx-auto grid grid-cols-1 gap-6">
+    <%- body %>
+  </div>
+</main>
 
-    <script>
-      const hamburgerBtn = document.getElementById("hamburgerBtn");
-      const mobileMenu = document.getElementById("mobileMenu");
+<!-- Footer -->
+<%- include('./components/portal/_footer.ejs') %>
 
-      hamburgerBtn.addEventListener("click", () => {
-        mobileMenu.classList.toggle("active");
-      });
 
-      document.addEventListener("click", (e) => {
-        if (
-          !hamburgerBtn.contains(e.target) &&
-          !mobileMenu.contains(e.target)
-        ) {
-          mobileMenu.classList.remove("active");
-        }
-      });
-    </script>
-  </body>
+<!-- Script -->
+<script>
+  const hamburgerBtn = document.getElementById("hamburgerBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  hamburgerBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!hamburgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+      mobileMenu.classList.remove("active");
+    }
+  });
+</script>
+</body>
 </html>
