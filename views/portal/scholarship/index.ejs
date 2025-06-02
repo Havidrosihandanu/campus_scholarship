@@ -300,24 +300,4 @@
     </div>
 </div>
 
-<script>
-    function closeSuccessModal() {
-        document.getElementById("successModal").classList.add("hidden");
-    }
 
-    function closeErrorModal() {
-        document.getElementById("errorModal").classList.add("hidden");
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const success = urlParams.get("success");
-        const error = urlParams.get("error");
-
-        if (success === "true") {
-            document.getElementById("successModal").classList.remove("hidden");
-        } else if (error) {
-            document.getElementById("errorModal").classList.remove("hidden");
-        }
-    });
-</script>
