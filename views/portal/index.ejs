@@ -1,149 +1,227 @@
 <!-- Hero Section -->
-<section class="bg-gradient-to-br from-blue-600 to-sky-400 text-white text-center py-20 px-4 rounded-xl shadow">
-    <h1 class="text-5xl md:text-6xl font-extrabold mb-4 floating">Sigma Scholarship</h1>
-    <p class="text-lg md:text-xl mb-6 max-w-2xl mx-auto">
-        Portal beasiswa digital yang membantu mahasiswa Indonesia mendapatkan akses ke pendidikan lebih tinggi.
-    </p>
-    <a href="/portal/scholarship" class="bg-white text-blue-600 font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-gray-100 transition">
-        Lihat Daftar Beasiswa
-    </a>
+<section
+  class="bg-gradient-to-br from-blue-600 to-sky-400 text-white text-center py-20 px-4 rounded-xl shadow"
+>
+  <h1 class="text-5xl md:text-6xl font-extrabold mb-4 floating">
+    Sigma Scholarship
+  </h1>
+  <p class="text-lg md:text-xl mb-6 max-w-2xl mx-auto">
+    Portal beasiswa digital yang membantu mahasiswa Indonesia mendapatkan akses
+    ke pendidikan lebih tinggi.
+  </p>
+  <a
+    href="/portal/scholarship"
+    class="bg-white text-blue-600 font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-gray-100 transition"
+  >
+    Lihat Daftar Beasiswa
+  </a>
 </section>
 
 <!-- Daftar Beasiswa -->
 <section id="beasiswa" class="mt-16 bg-white rounded-xl shadow px-6 py-10">
-    <h2 class="text-3xl font-bold text-center mb-10">Daftar Beasiswa</h2>
-    <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-blue-100 p-6 rounded-xl shadow hover:shadow-lg transition">
-            <h3 class="text-xl font-semibold mb-2">Beasiswa D3</h3>
-            <p class="text-sm text-gray-700">Diperuntukkan untuk mahasiswa Diploma 3 dari seluruh Indonesia.</p>
-        </div>
-        <div class="bg-blue-100 p-6 rounded-xl shadow hover:shadow-lg transition">
-            <h3 class="text-xl font-semibold mb-2">Beasiswa S1</h3>
-            <p class="text-sm text-gray-700">Kesempatan meraih pendidikan sarjana tanpa hambatan biaya.</p>
-        </div>
-        <div class="bg-blue-100 p-6 rounded-xl shadow hover:shadow-lg transition">
-            <h3 class="text-xl font-semibold mb-2">Beasiswa S2/S3</h3>
-            <p class="text-sm text-gray-700">Dukung jenjang studi lanjut Anda ke magister dan doktoral.</p>
-        </div>
+  <h2 class="text-3xl font-bold text-center mb-10">Daftar Beasiswa</h2>
+  <div class="grid md:grid-cols-3 gap-8">
+    <div class="bg-blue-100 p-6 rounded-xl shadow hover:shadow-lg transition">
+      <h3 class="text-xl font-semibold mb-2">Beasiswa D3</h3>
+      <p class="text-sm text-gray-700">
+        Diperuntukkan untuk mahasiswa Diploma 3 dari seluruh Indonesia.
+      </p>
     </div>
+    <div class="bg-blue-100 p-6 rounded-xl shadow hover:shadow-lg transition">
+      <h3 class="text-xl font-semibold mb-2">Beasiswa S1</h3>
+      <p class="text-sm text-gray-700">
+        Kesempatan meraih pendidikan sarjana tanpa hambatan biaya.
+      </p>
+    </div>
+    <div class="bg-blue-100 p-6 rounded-xl shadow hover:shadow-lg transition">
+      <h3 class="text-xl font-semibold mb-2">Beasiswa S2/S3</h3>
+      <p class="text-sm text-gray-700">
+        Dukung jenjang studi lanjut Anda ke magister dan doktoral.
+      </p>
+    </div>
+  </div>
 </section>
 
 <!-- Tentang Kami -->
 <section id="tentang" class="mt-16 bg-sky-50 rounded-xl px-6 py-10 shadow">
-    <div class="text-center max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6">Tentang Sigma Scholarship</h2>
-        <p class="text-gray-700 leading-relaxed text-lg">
-            Sigma Scholarship adalah platform beasiswa digital yang didedikasikan untuk mendukung mahasiswa Indonesia dalam mengakses pendidikan tinggi tanpa batasan ekonomi. Kami percaya bahwa pendidikan berkualitas adalah hak semua orang.
-        </p>
-    </div>
+  <div class="text-center max-w-3xl mx-auto">
+    <h2 class="text-3xl font-bold mb-6">Tentang Sigma Scholarship</h2>
+    <p class="text-gray-700 leading-relaxed text-lg">
+      Sigma Scholarship adalah platform beasiswa digital yang didedikasikan
+      untuk mendukung mahasiswa Indonesia dalam mengakses pendidikan tinggi
+      tanpa batasan ekonomi. Kami percaya bahwa pendidikan berkualitas adalah
+      hak semua orang.
+    </p>
+  </div>
 </section>
 
 <!-- Alumni -->
-<section class="mt-16 bg-lime-700 rounded-xl px-6 py-10 shadow text-white">
-    <h2 class="text-3xl font-bold text-center mb-8 uppercase tracking-wide">Alumni</h2>
-    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-8 gap-2">
-        <% for(let i = 1; i <= 16; i++) { %>
-            <div class="cursor-pointer" onclick="openModal(<%= i %>)">
-                <img src="/uploads/alumni/alumni<%= i %>.jpg" class="rounded-lg shadow hover:scale-105 transition duration-300" alt="Alumni <%= i %>">
-            </div>
-        <% } %>
+<section class="mt-16  bg-gradient-to-r from-green-500 to-blue-400  rounded-xl px-6 py-10 shadow text-white">
+  <h2 class="text-3xl font-bold text-center mb-8 uppercase tracking-wide">
+    Alumni
+  </h2>
+  <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-8 gap-2">
+    <% for(let i = 1; i <= 16; i++) { %>
+    <div class="cursor-pointer" onclick="openModal(<%= i %>)">
+      <img
+        src="/images/alumni/alumni<%= i %>.jpg"
+        class="rounded-lg shadow hover:scale-105 transition duration-300 object-cover h-[220px] w-[200px]"
+        alt="Alumni <%= i %>"
+      />
     </div>
+    <% } %>
+  </div>
 </section>
 
 <!-- Modal Alumni -->
-<div id="alumniModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
-    <div id="alumniModalContent" class="w-full h-full flex items-center justify-center p-4 animate-fade-in-down">
-        <div class="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto p-6 rounded-2xl shadow-2xl relative">
-            <button type="button" onclick="closeModal('alumniModal')" class="absolute top-3 right-4 text-2xl text-gray-400 hover:text-red-500 transition leading-none" title="Tutup">
-                &times;
-            </button>
-            <img id="modalImage" src="" alt="Foto Alumni" class="w-full rounded-xl mb-4 shadow">
-            <p id="modalText" class="text-gray-700 text-base leading-relaxed"></p>
-        </div>
+<div
+  id="alumniModal"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm"
+>
+  <div
+    id="alumniModalContent"
+    class="w-full h-full flex items-center justify-center p-4 animate-fade-in-down"
+  >
+    <div
+      class="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto p-6 rounded-2xl shadow-2xl relative"
+    >
+      <button
+        type="button"
+        onclick="closeModal('alumniModal')"
+        class="absolute top-3 right-4 text-2xl text-gray-400 hover:text-red-500 transition leading-none"
+        title="Tutup"
+      >
+        &times;
+      </button>
+      <img
+        id="modalImage"
+        src=""
+        alt="Foto Alumni"
+        class="w-full rounded-xl mb-4 shadow object-cover h-[600px]"
+      />
+      <p id="modalText" class="text-gray-700 text-base leading-relaxed"></p>
     </div>
+  </div>
 </div>
 
 <!-- Testimoni -->
 <section class="mt-16 bg-white px-6 py-12 rounded-xl shadow">
-    <h2 class="text-3xl font-bold text-center mb-10">Apa Kata Penerima Beasiswa</h2>
-    <div class="grid md:grid-cols-3 gap-6 text-gray-700">
-        <div class="bg-gray-100 p-6 rounded-xl shadow">
-            <p class="mb-4 italic">"Berkat Sigma Scholarship, saya bisa menyelesaikan kuliah tanpa khawatir soal biaya. Terima kasih banyak!"</p>
-            <p class="font-semibold">– Rina, Mahasiswa S1 Universitas Indonesia</p>
-        </div>
-        <div class="bg-gray-100 p-6 rounded-xl shadow">
-            <p class="mb-4 italic">"Platform ini sangat mudah digunakan, dan proses seleksinya transparan. Sangat membantu!"</p>
-            <p class="font-semibold">– Andi, Penerima Beasiswa D3 dari Makassar</p>
-        </div>
-        <div class="bg-gray-100 p-6 rounded-xl shadow">
-            <p class="mb-4 italic">"Saya bisa lanjut studi ke S2 berkat bantuan dari Sigma Scholarship. Ini sangat berarti bagi keluarga saya."</p>
-            <p class="font-semibold">– Lestari, Mahasiswa Pascasarjana ITB</p>
-        </div>
+  <h2 class="text-3xl font-bold text-center mb-10">
+    Apa Kata Penerima Beasiswa
+  </h2>
+  <div class="grid md:grid-cols-3 gap-6 text-gray-700">
+    <div class="bg-gray-100 p-6 rounded-xl shadow">
+      <p class="mb-4 italic">
+        "Berkat Sigma Scholarship, saya bisa menyelesaikan kuliah tanpa khawatir
+        soal biaya. Terima kasih banyak!"
+      </p>
+      <p class="font-semibold">– Rina, Mahasiswa S1 Universitas Indonesia</p>
     </div>
+    <div class="bg-gray-100 p-6 rounded-xl shadow">
+      <p class="mb-4 italic">
+        "Platform ini sangat mudah digunakan, dan proses seleksinya transparan.
+        Sangat membantu!"
+      </p>
+      <p class="font-semibold">– Andi, Penerima Beasiswa D3 dari Makassar</p>
+    </div>
+    <div class="bg-gray-100 p-6 rounded-xl shadow">
+      <p class="mb-4 italic">
+        "Saya bisa lanjut studi ke S2 berkat bantuan dari Sigma Scholarship. Ini
+        sangat berarti bagi keluarga saya."
+      </p>
+      <p class="font-semibold">– Lestari, Mahasiswa Pascasarjana ITB</p>
+    </div>
+  </div>
 </section>
 
 <!-- Cara Daftar -->
 <section class="mt-16 bg-sky-100 px-6 py-12 rounded-xl shadow">
-    <h2 class="text-3xl font-bold text-center mb-6">Cara Mendaftar Beasiswa</h2>
-    <ol class="max-w-3xl mx-auto list-decimal list-inside text-lg text-gray-700 space-y-3">
-        <li>Buka halaman <a href="/portal/scholarship" class="text-blue-700 underline">Daftar Beasiswa</a>.</li>
-        <li>Pilih beasiswa yang sesuai dengan jenjang studi Anda.</li>
-        <li>Klik tombol “Daftar” dan isi formulir pendaftaran secara lengkap.</li>
-        <li>Unggah dokumen yang diminta seperti surat rekomendasi dan file pendukung.</li>
-        <li>Tunggu pengumuman hasil seleksi melalui halaman pengumuman.</li>
-    </ol>
+  <h2 class="text-3xl font-bold text-center mb-6">Cara Mendaftar Beasiswa</h2>
+  <ol
+    class="max-w-3xl mx-auto list-decimal list-inside text-lg text-gray-700 space-y-3"
+  >
+    <li>
+      Buka halaman
+      <a href="/portal/scholarship" class="text-blue-700 underline"
+        >Daftar Beasiswa</a
+      >.
+    </li>
+    <li>Pilih beasiswa yang sesuai dengan jenjang studi Anda.</li>
+    <li>Klik tombol “Daftar” dan isi formulir pendaftaran secara lengkap.</li>
+    <li>
+      Unggah dokumen yang diminta seperti surat rekomendasi dan file pendukung.
+    </li>
+    <li>Tunggu pengumuman hasil seleksi melalui halaman pengumuman.</li>
+  </ol>
 </section>
 
 <!-- Ajakan -->
-<section class="mt-16 bg-gradient-to-r from-blue-500 to-sky-400 text-white text-center px-6 py-16 rounded-xl shadow">
-    <h2 class="text-3xl md:text-4xl font-bold mb-4">Siap Mewujudkan Masa Depanmu?</h2>
-    <p class="text-lg md:text-xl mb-6">Daftarkan dirimu sekarang dan raih beasiswa impianmu bersama Sigma Scholarship.</p>
-    <a href="/portal/scholarship" class="bg-white text-blue-600 font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-gray-100 transition">
-        Mulai Daftar Beasiswa
-    </a>
+<section
+  class="mt-16 bg-gradient-to-r from-blue-500 to-sky-400 text-white text-center px-6 py-16 rounded-xl shadow"
+>
+  <h2 class="text-3xl md:text-4xl font-bold mb-4">
+    Siap Mewujudkan Masa Depanmu?
+  </h2>
+  <p class="text-lg md:text-xl mb-6">
+    Daftarkan dirimu sekarang dan raih beasiswa impianmu bersama Sigma
+    Scholarship.
+  </p>
+  <a
+    href="/portal/scholarship"
+    class="bg-white text-blue-600 font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-gray-100 transition"
+  >
+    Mulai Daftar Beasiswa
+  </a>
 </section>
 
 <!-- Script Modal -->
 <script>
-    const testimonials = {
-        1: "Rina adalah alumni dari Universitas Indonesia yang menerima Beasiswa S1 pada tahun 2022.",
-        2: "Andi berasal dari Makassar dan menerima Beasiswa D3. Kini ia bekerja di perusahaan teknologi nasional.",
-        3: "Lestari adalah mahasiswa pascasarjana ITB yang berhasil menyelesaikan studi S2 berkat Sigma Scholarship.",
-        4: "Budi, alumni Beasiswa S1 dari Medan, kini melanjutkan S2 di luar negeri.",
-        5: "Sari, lulusan Beasiswa D3, kini berkarier di bidang kesehatan masyarakat.",
-        6: "Ardi memanfaatkan Beasiswa S1 untuk menjadi pengusaha muda sukses.",
-        7: "Desi menerima Beasiswa Pascasarjana dan kini mengajar di universitas negeri.",
-        8: "Raka menggunakan beasiswa untuk meneliti perubahan iklim di Papua.",
-        9: "Nina aktif dalam komunitas pendidikan setelah lulus dengan dukungan Sigma.",
-        10: "Bayu menerima Beasiswa D3 dan menjadi teknisi profesional di industri.",
-        11: "Vina menyelesaikan pendidikan magisternya dengan prestasi cumlaude.",
-        12: "Eko kini bekerja di kementerian setelah lulus dengan dukungan Sigma Scholarship."
-    };
+  const testimonials = {
+    1: "Andi berasal dari Makassar dan menerima Beasiswa D3. Kini ia bekerja di perusahaan teknologi nasional.",
+    2: "Rina adalah alumni dari Universitas Indonesia yang menerima Beasiswa S1 pada tahun 2022.",
+    3: "Lestari adalah mahasiswa pascasarjana ITB yang berhasil menyelesaikan studi S2 berkat Sigma Scholarship.",
+    4: "Sana, alumni Beasiswa S1 dari Medan, kini melanjutkan S2 di luar negeri.",
+    5: "Sari, lulusan Beasiswa D3, kini berkarier di bidang kesehatan masyarakat.",
+    6: "Desi menerima Beasiswa Pascasarjana dan kini mengajar di universitas negeri.",
+    7: "Ardi memanfaatkan Beasiswa S1 untuk menjadi pengusaha muda sukses.",
+    8: "Raka menggunakan beasiswa untuk meneliti perubahan iklim di Papua.",
+    9: "Nina aktif dalam komunitas pendidikan setelah lulus dengan dukungan Sigma.",
+    10: "Cantika menerima Beasiswa D3 dan menjadi teknisi profesional di industri.",
+    11: "Vina menyelesaikan pendidikan magisternya dengan prestasi cumlaude.",
+    12: "Eko kini bekerja di kementerian setelah lulus dengan dukungan Sigma Scholarship.",
+    13: "Bayu menerima Beasiswa D3 dan menjadi teknisi profesional di industri.",
+    14: "Setyo menerima Beasiswa D3 dan menjadi teknisi profesional di industri.",
+    15: "Nugroho menerima Beasiswa D3 dan menjadi teknisi profesional di industri.",
+    16: "Ayu menerima Beasiswa D3 dan menjadi teknisi profesional di industri.",
+  };
 
-    function openModal(id) {
-        const modal = document.getElementById("alumniModal");
-        const content = document.getElementById("alumniModalContent");
+  function openModal(id) {
+    const modal = document.getElementById("alumniModal");
+    const content = document.getElementById("alumniModalContent");
 
-        document.getElementById("modalImage").src = `/uploads/alumni/alumni${id}.jpg`;
-        document.getElementById("modalText").innerText = testimonials[id] || "Testimoni alumni tidak tersedia.";
+    document.getElementById(
+      "modalImage"
+    ).src = `/images/alumni/alumni${id}.jpg`;
+    document.getElementById("modalText").innerText =
+      testimonials[id] || "Testimoni alumni tidak tersedia.";
 
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
 
-        content.classList.remove("animate-fade-out-up");
-        content.classList.add("animate-fade-in-down");
-    }
+    content.classList.remove("animate-fade-out-up");
+    content.classList.add("animate-fade-in-down");
+  }
 
-    function closeModal(modalId) {
-        const modal = document.getElementById(modalId);
-        const content = modal.querySelector("div.animate-fade-in-down");
+  function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    const content = modal.querySelector("div.animate-fade-in-down");
 
-        content.classList.remove("animate-fade-in-down");
-        content.classList.add("animate-fade-out-up");
+    content.classList.remove("animate-fade-in-down");
+    content.classList.add("animate-fade-out-up");
 
-        setTimeout(() => {
-            modal.classList.remove("flex");
-            modal.classList.add("hidden");
-        }, 250);
-    }
+    setTimeout(() => {
+      modal.classList.remove("flex");
+      modal.classList.add("hidden");
+    }, 250);
+  }
 </script>
